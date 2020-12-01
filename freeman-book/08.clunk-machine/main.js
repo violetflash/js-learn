@@ -29,6 +29,6 @@ function display(counter, output) {
 }
 
 var clunkCounter = 0;
-thingamajig(2);
+thingamajig(4);
 console.log(clunkCounter);
 document.write(clunkCounter);
