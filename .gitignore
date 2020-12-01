@@ -1,0 +1,11 @@
+.DS_Store
+.AppleDouble
+.LSOverride
+.git/
+.idea/
+node_modules/
+app/css/
+.vs
+result/
+package-lock.json
+dist/

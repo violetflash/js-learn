@@ -1,9 +1,3 @@
-function dogInfo(name, age) {
-    document.write("Dog: " + name + "<br>");
-    document.write("Age: " + age + "<br>");
-    document.write("Barkling: " + barkling + "<br>");
-}
-
 function bark(name, age) {
     if (age >= 20) {
         barkling = "WOOF WOOF";
@@ -13,6 +7,12 @@ function bark(name, age) {
         barkling = "woof woof";
         dogInfo(name, age);
     }
+}
+
+function dogInfo(name, age) {
+    document.write("Dog: " + name + "<br>");
+    document.write("Age: " + age + "<br>");
+    document.write("Barkling: " + barkling + "<br>");
 }
 
 name = prompt("Dog's name:");
