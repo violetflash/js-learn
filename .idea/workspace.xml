@@ -1,27 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="679f0284-7732-485d-bded-eaed1191296d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/freeman-book/08.clunk-machine/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/freeman-book/08.clunk-machine/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,21 +24,21 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/freeman-book/09.factorial" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\09.factorial" />
-      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\draft" />
-      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\07.functions_bark" />
-      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\06.battleship" />
-      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\05.99-bottles-song" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\elroy\Web\Projects\js-learn\freeman-book" />
       <recent name="C:\elroy\Web\Projects\js-learn\conslole.cats" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\08.clunk-machine" />
+      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\06.battleship" />
+      <recent name="C:\elroy\Web\Projects\js-learn\freeman-book\05.99-bottles-song" />
+      <recent name="C:\elroy\Web\Projects\js-learn\04.birthday" />
+      <recent name="C:\elroy\Web\Projects\js-learn\scoops" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -68,43 +49,19 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1606453646753</updated>
-      <workItem from="1606453648347" duration="6138000" />
-      <workItem from="1606499758303" duration="595000" />
-      <workItem from="1606546145535" duration="9276000" />
-      <workItem from="1606638895749" duration="4530000" />
-      <workItem from="1606838911351" duration="3177000" />
+      <workItem from="1606453648347" duration="6501000" />
+      <workItem from="1606798665733" duration="3374000" />
+      <workItem from="1606880156466" duration="96000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
   <component name="WindowStateProjectService">
-    <state x="623" y="265" width="672" height="678" key="search.everywhere.popup" timestamp="1606553905709">
-      <screen x="0" y="40" width="1920" height="1040" />
+    <state x="620" y="300" key="FileChooserDialogImpl" timestamp="1606880252115">
+      <screen x="0" y="40" width="1680" height="1010" />
     </state>
-    <state x="623" y="265" width="672" height="678" key="search.everywhere.popup/0.40.1920.1040@0.40.1920.1040" timestamp="1606553905709" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/freeman-book/03.scoops/main.js</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="620" y="300" key="FileChooserDialogImpl/0.40.1680.1010/1680.40.1680.1010@0.40.1680.1010" timestamp="1606880252115" />
   </component>
 </project>

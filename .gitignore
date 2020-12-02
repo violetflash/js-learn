@@ -6,6 +6,5 @@
 node_modules/
 app/css/
 .vs
-result/
 package-lock.json
 dist/
