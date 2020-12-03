@@ -14,12 +14,57 @@ var costs = [
     .20, .25, .30, .25, .24, .25,
     .25, .25, .27, .25, .26, .29];
 
-function effectiveScore(scores, costs) {
-    var cheapest = 0;
-    for (let i = 0; i < scores.length; i++) {
-        if (scores[i] == maxScore(scores)) {
+// function effectiveScore(scores, costs) {
+//     var cheapest;
+//     var maxScoreCosts = [];
+//     var maxScores = maxScoreIndexes(scores);
+//     for (let i = 0; i < maxScores.length; i++) {
+//         maxScoreCosts.push(costs[maxScores[i]]);
+//     }
+//     for (let i = 0; i < maxScoreCosts.length; i++) {
+//         cheapest = maxScoreCosts[0];
+//         if (maxScoreCosts[i] < cheapest ) {
+//             cheapest = maxScoreCosts[i];
+//         }
+//     }
+//     document.write("<br>The most effective solution with cost of: " + cheapest)
+// }
 
+function mostEffectiveSolution(scores, costs, highscore) {
+    var cost = 100;
+    var index;
+    for (let i = 0; i < scores.length; i++) {
+        if (scores[i] == highscore) {
+            if (costs[i] < cost) {
+                cost = costs[i];
+                index = i;
+            }
         }
+    }
+    document.write("<br>The most effective solution is #" + index + " with cost of: " + costs[index])
+    // return index;
+}
+
+//var2
+function getMostCostEffectiveSolution2(bestSolutions, costs) {
+    var cost = 100;
+    var solutionIndex;
+    var lowCostIndex;
+
+    for (var i = 0; i < bestSolutions.length; i++) {
+        solutionIndex = bestSolutions[i];
+        if (cost > costs[solutionIndex]) {
+            lowCostIndex = solutionIndex;
+            cost = costs[solutionIndex];
+        }
+    }
+    return lowCostIndex;
+}
+
+
+function printCosts(costs) {
+    for (let i = 0; i < costs.length; i++) {
+        document.write("Bubble solution #" + [i] + " cost: " + costs[i] + "<br>");
     }
 }
 
@@ -57,13 +102,21 @@ function hashificator(elem) {
     }
 }
 
-function report(scores) {
+function report(scores, costs) {
+    document.write("SCORES===================<br><br>");
     printScores(scores);
-    document.write("===========================" + "<br><br>");
+    document.write("<br>COSTS====================<br><br>");
+    printCosts(costs);
+    document.write("<br>REPORT=====================<br><br>");
     document.write("Bubble tests: " + scores.length + "<br>");
     document.write("Highest bubble score: " + maxScore(scores) + "<br>");
     document.write("Solutions with highest score: ")
     hashificator(maxScoreIndexes(scores));
+    // effectiveScore(scores, costs)
+    mostEffectiveSolution(scores, costs, maxScore(scores));
+    document.write("<br><br>===========================<br><br>");
+
 }
 
-report(scores);
+
+report(scores, costs);
