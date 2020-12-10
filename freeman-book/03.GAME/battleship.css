@@ -1,3 +1,13 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
 body {
   background-color: black;
 }
@@ -18,9 +28,42 @@ body {
   font-size: 50px;
 }
 
-.boardTable {
+.table {
   position: absolute;
   left: 173px;
-  top: 98px;
+  top: 99px;
   border-spacing: 0;
+}
+
+.table td {
+  width: 96px;
+  height: 96px;
+}
+
+.shootForm {
+  position: absolute;
+  right: 50%;
+  bottom: 0;
+  transform: translate(50%, 100%);
+  padding: 15px;
+  background-color: rgb(83, 175, 19);
+}
+
+.shootForm input {
+  padding: 5px;
+  background-color: rgb(152, 207, 113);
+  border-color: rgb(83, 175, 19);
+  font-size: 1em;
+  outline: transparent;
+}
+
+.hit {
+  background-image: url("ship.png");
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  /*background-size: 90%;*/
+}
+
+.miss {
+  background: url("miss.png") no-repeat center center;
 }
