@@ -1,10 +1,14 @@
-function pageLoadedHandler() {
-    alert("I am alive!");
+window.onload = init;
+
+function init() {
+    var images = document.getElementsByTagName("img");
+    for (let i = 0; i < image.length; i++) {
+        images[i].onclick = changeImg;
+    }
+
 }
 
-msg = alert("Woa!!")
-
-
-//этот обработчик события называют функция обратного вызова
-window.onload = pageLoadedHandler;
-// window.onload = msg;
+function changeImg() {
+    var images = document.getElementsByTagName("img");
+    images.src = "zero.jpg"
+}
