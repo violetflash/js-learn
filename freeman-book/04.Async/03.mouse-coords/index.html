@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <title></title>
   <style>
+    body {
+      color: #000;
+    }
     div {
-      display: inline-block;
       margin: 10px;
       width: 400px;
       height: 430px;
@@ -17,15 +19,23 @@
       object-fit: cover;
       object-position: center;
     }
+    
+    p {
+      width: 200px;
+      height: 50px;
+      background-color: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+    }
   </style>
 </head>
 <body>
-  <div><img id="zero" src="zeroblur.jpg" alt=""></div>
-  <div><img id="one" src="oneblur.jpg" alt=""></div>
-  <div><img id="two" src="twoblur.jpg" alt=""></div>
-  <div><img id="three" src="threeblur.jpg" alt=""></div>
-  <div><img id="four" src="fourblur.jpg" alt=""></div>
-  <div><img id="five" src="fiveblur.jpg" alt=""></div>
+  <div>
+    <img id="map" src="map.jpg" alt="">
+  </div>
+  <p id="text">fsfsf</p>
   <script src="main.js"></script>
 </body>
 </html>
