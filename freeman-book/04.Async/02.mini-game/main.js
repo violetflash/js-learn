@@ -3,9 +3,11 @@ window.onload = init;
 function init() {
     var images = document.getElementsByTagName("img");
     for (let i = 0; i < images.length; i++) {
-        images[i].onclick = changeImg;
-        images[i].onmouseleave = returnBlur;
+        images[i].onmouseover = changeImg;
+        // images[i].onmouseleave = returnBlur;
+
     }
+
 
 }
 
@@ -19,9 +21,10 @@ function changeImg(eventObj) {
     // if (eventObj.timeStamp > 5000) {
     //     image.src = blured;
     // }
+    setTimeout(returnBlur, 3000, image);
 }
 
-function returnBlur(eventObj) {
-    var image = eventObj.target;
+function returnBlur(image) {
+    // var image = eventObj.target;
     image.src = image.id + "blur.jpg";
 }

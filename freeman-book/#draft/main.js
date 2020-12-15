@@ -1,11 +1,5 @@
-function doIt(param) {
-    param = 2;
-}
-
-var test = 1;
-doIt(test);
-function testLog(text, param) {
-    console.log(text + " " + param);
-}
-
-testLog("Значение параметра:");
+var addOne = function(x) {
+    return x + 1;
+} ;
+var six = addOne(5);
+console.log(six);
