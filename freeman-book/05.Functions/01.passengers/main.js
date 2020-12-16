@@ -1,8 +1,8 @@
 var passengers = [
-    { name: "Jane Doloop", paid: true },
-    { name: "Dr. Evil", paid: true },
-    { name: "Sue Property", paid: false },
-    { name: "John Funcall", paid: true }
+    { name: "Jane Doloop", paid: true, ticket: "coach" },
+    { name: "Dr. Evil", paid: true, ticket: "first class" },
+    { name: "Sue Property", paid: false, ticket: "first class" },
+    { name: "John Funcall", paid: true, ticket: "coach" }
     ];
 
 var blacklist = ["Dr. Evil", "Sue Property"];
@@ -48,23 +48,33 @@ function printPassenger(passenger) {
 
 processPassengers(passengers, printPassenger);
 
-function fun(echo) {
-    console.log(echo);
+function createDrinkOrder(passenger) {
+    var orderFunction;
+    if (passenger.ticket === "first class") {
+        orderFunction = function () {
+            alert("Would you like cocktail or wine?");
+        }
+    } else {
+        orderFunction = function () {
+            alert("Your choice is cola or water?");
+        }
+    }
+    return orderFunction;
 }
 
-fun("hello");
-function boo(aFunction) {
-    aFunction("boo");
+function serveCustomer(passenger) {
+    //возвращает функцию, которая сохраняется в переменной
+    var getDrinkOrderFunction = createDrinkOrder(passenger);
+    getDrinkOrderFunction();
 }
-boo(fun);
-fun(boo);
 
-var moreFun = fun;
-moreFun("hello again");
-
-function echoMaker() {
-    return fun;
+function servePassengers(passengers) {
+    for (let i = 0; i < passengers.length; i++) {
+        serveCustomer(passengers[i]);
+    }
 }
-var bigFun = echoMaker();
-bigFun("Is there an echo?");
+
+servePassengers(passengers);
+
+
 
