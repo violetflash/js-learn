@@ -2,7 +2,9 @@ var passengers = [
     { name: "Jane Doloop", paid: true, ticket: "coach" },
     { name: "Dr. Evil", paid: true, ticket: "first class" },
     { name: "Sue Property", paid: false, ticket: "first class" },
-    { name: "John Funcall", paid: true, ticket: "coach" }
+    { name: "John Funcall", paid: true, ticket: "coach" },
+    { name: "Peter Parker", paid: true, ticket: "premium economy" },
+    { name: "Steve Rogers", paid: true, ticket: "premium economy" }
     ];
 
 var blacklist = ["Dr. Evil", "Sue Property"];
@@ -48,24 +50,51 @@ function printPassenger(passenger) {
 
 processPassengers(passengers, printPassenger);
 
+
+//возвращаемая функция очень простая и уже соответствует типу пассажира
 function createDrinkOrder(passenger) {
     var orderFunction;
     if (passenger.ticket === "first class") {
         orderFunction = function () {
             alert("Would you like cocktail or wine?");
         }
-    } else {
+    } else if (passenger.ticket === "coach") {
         orderFunction = function () {
             alert("Your choice is cola or water?");
+        }
+    } else if (passenger.ticket === "premium economy") {
+        orderFunction = function () {
+            alert("Your choice is cola, water or wine?");
         }
     }
     return orderFunction;
 }
 
+function createDinnerOrder(passenger) {
+    var orderFunction;
+    if (passenger.ticket === "first class") {
+        orderFunction = function () {
+            alert("Would you like chicken or pasta?");
+        }
+    } else if (passenger.ticket === "coach") {
+        orderFunction = function () {
+            alert("Your choice is nuts or crackers");
+        }
+    } else if (passenger.ticket === "premium economy") {
+        orderFunction = function () {
+            alert("Your choice is snacks or cheese plate?");
+        }
+    }
+    return orderFunction;
+}
+
+
 function serveCustomer(passenger) {
     //возвращает функцию, которая сохраняется в переменной
     var getDrinkOrderFunction = createDrinkOrder(passenger);
+    var getDinnerOrderFunction = createDinnerOrder(passenger);
     getDrinkOrderFunction();
+    getDinnerOrderFunction();
 }
 
 function servePassengers(passengers) {
