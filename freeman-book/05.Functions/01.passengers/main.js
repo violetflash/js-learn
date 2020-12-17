@@ -70,6 +70,7 @@ function createDrinkOrder(passenger) {
     return orderFunction;
 }
 
+//функция возвращает функцию, с уже проведенным сравнением.
 function createDinnerOrder(passenger) {
     var orderFunction;
     if (passenger.ticket === "first class") {
