@@ -18,20 +18,48 @@ console.log(doCount());
 console.log("Задачи");
 
 function makePassword(password) {
-    return function (passwordGuess) {
+    return function guess(passwordGuess) {
         return (passwordGuess === password);
     }
 }
 
+var tryGuess = makePassword("secret");
+console.log("Guessing 'nope': " + tryGuess("nope"));
+console.log("Guessing 'secret': " + tryGuess("secret"));
+
 function multN(n) {
-    return function (num) {
+    return function(num) {
         return num * n;
     }
 }
 
+var multBy3 = multN(3);
+console.log("Multiplying 2: " + multBy3(2));
+console.log("Multiplying 3: " + multBy3(3));
+
 function makeCounter2() {
     var count = 0;
-    return increment = {
+    return  {
+        increment: function () {
+            return count++;
 
+        }
     }
 }
+
+var count2 = makeCounter2();
+console.log(count2.increment());
+console.log(count2.increment());
+console.log(count2.increment());
+
+//Еще пример замыкания.
+function makeTimer(doneMessage, n) {
+    setTimeout(
+        function () { //функция со свободной переменной doneMessage
+            alert(doneMessage);  //которая использ-ся как обработчик setTimeout
+        },
+        n)
+    doneMessage = "OUCH!"
+}
+makeTimer("Cookies!!", 3000);
+

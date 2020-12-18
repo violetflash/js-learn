@@ -13,18 +13,11 @@ function init() {
 
 function changeImg(eventObj) {
     var image = eventObj.target;
-    var blured = image.src;
-    console.log(blured);
     image.src = image.id + ".jpg";
-    // eventObj.timeStamp = 0;
-    // console.log(eventObj.timeStamp)
-    // if (eventObj.timeStamp > 5000) {
-    //     image.src = blured;
-    // }
-    setTimeout(returnBlur, 3000, image);
+    setTimeout(
+        function () {  //использование замыкания со свободной переменной image
+            image.src = image.id + "blur.jpg";
+        },
+        3000);
 }
 
-function returnBlur(image) {
-    // var image = eventObj.target;
-    image.src = image.id + "blur.jpg";
-}
