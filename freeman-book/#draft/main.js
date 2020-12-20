@@ -1,5 +1,10 @@
-var addOne = function(x) {
-    return x + 1;
-} ;
-var six = addOne(5);
-console.log(six);
+function a() {
+    return 'результат';
+}
+
+b = a;
+c = a();
+console.log(b);
+console.log(c);
+console.log(b());
+console.log(c());
