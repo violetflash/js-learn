@@ -6,9 +6,7 @@ function Dog(name, breed, weight) {
 
 //конструктор выставочной собаки
 function ShowDog(name, breed, weight, handler) {
-    this.name = name;
-    this.breed = breed;
-    this.weight = weight;
+    Dog.call(this, name, breed, weight); //использует конструктор Dog для обработки свойств
     this. handler = handler;
 }
 
@@ -27,7 +25,7 @@ ShowDog.prototype.bait = function () {
     console.log(this.name + " baits!");
 };
 
-ShowDog.prototype.gait = function (type) {
+ShowDog.prototype.gait = function (kind) {
     console.log(kind + "ing");
 };
 
@@ -92,6 +90,7 @@ var fluffy = new Dog("Fluffy", "Poodle", 30);
 var spot = new Dog("Spot", "Chihuahua", 10);
 var barnaby = new Dog("Barnaby", "Basset Hound", 55);
 var scotty = new ShowDog("Scotty", "Scottish Terrier", 15, "Cookie");
+var beatrice = new ShowDog("Beatrice", "Pomeranian", 5, "Hamilton");
 
 console.log(fido instanceof ShowDog);
 console.log("Fido constructor is " + fido.constructor);
@@ -102,3 +101,11 @@ scotty.bait();
 scotty.bark();
 console.log(scotty.league);
 console.log(scotty.species);
+
+fido.bark();
+fluffy.bark();
+spot.bark();
+scotty.bark();
+beatrice.bark();
+scotty.gait("Walk");
+beatrice.groom();
