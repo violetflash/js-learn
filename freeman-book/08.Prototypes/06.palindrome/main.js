@@ -5,12 +5,23 @@
 Добавьте метод в String.prototype и протестируйте результат.
 */
 
-String.prototype.palindrome = function (word) {
-    var reverse = this.slice();
-    return word === reverse.split("").reverse().join("");
+String.prototype.palindrome = function () {
+    // var str = this.slice();
+    return this.valueOf() === this.split("").reverse().join("");
+    /*  //еще способ определения палиндрома:
+    var len = this.length - 1;
+    for (let i = 0; i < len; i++) {
+        if (this.charAt(i) !== this.charAt(i - 1)) {
+            return false;
+        } else if (i === len - i) {
+            return true;
+        }
+    }
+    return true;
+
+     */
 }
 
-var str = "hello";
-var str2 = "ollehf";
-console.log(str.palindrome(str2));
+var str = "wow";
+console.log(str.palindrome());
 
