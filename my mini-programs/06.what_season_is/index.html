@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>What season is?</title>
+  <style>
+    html {
+      box-sizing: border-box;
+    }
+
+    * {
+      box-sizing: inherit;
+    }
+
+    form {
+      display: flex;
+      align-items: center;
+      margin: 0 0 10px;
+
+    }
+
+    label {
+      font-size: 24px;
+    }
+
+    input {
+      margin: 0 0 0 20px;
+      padding: 0 10px;
+      height: 40px;
+      line-height: 40px;
+      width: 250px;
+      font-size: 16px;
+    }
+    button {
+      display: inline-block;
+      height: 40px;
+    }
+
+    div {
+      width: 600px;
+      height: 600px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <label>
+      Введите месяц года:
+      <input class="season" type="text" placeholder='например, "Январь"'>
+    </label>
+    <button class="btn" type="button">Отправить</button>
+  </form>
+  <div>
+    <img id="image" src="seasons.jpg" alt="время года">
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
