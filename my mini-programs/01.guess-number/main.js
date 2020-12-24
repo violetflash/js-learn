@@ -1,10 +1,10 @@
-var limit = prompt("От 0 до какого числа будем загадывать?", 50);
+//TODO  Дополнить программу собиранием статистики сыгранных игр (разброс, кол-во попыток) и вывода её по окончании всех игр.
 
-function guessNumber(number) {
-    var count = 0;
+function guessNumber(number, limit) {
+    let count = 0;
     while (true) {
         count++;
-        var guess = prompt(`Угадай, какое число от 0 до ${limit} я загадал?`, '');
+        let guess = prompt(`Угадай, какое число от 0 до ${limit} я загадал?`, '');
         if (isNaN(guess)) {
             alert("Принимаются только числа!")
         } else if (+guess === number) {
@@ -17,7 +17,17 @@ function guessNumber(number) {
     }
 }
 
-var secret = Math.floor(Math.random() * (+limit + 1));
-console.log(secret);
+function game() {
+    let more = true;
+    while (more) {
+        let limit = prompt("От 0 до какого числа будем загадывать?", 50);
+        let secret = Math.floor(Math.random() * (+limit + 1));
+        console.log(secret);
+        guessNumber(secret, limit);
+        more = confirm("Сыграем еще разок?");
+    }
+    alert("Нет так нет. Пока!");
+}
 
-guessNumber(secret);
+game();
+
