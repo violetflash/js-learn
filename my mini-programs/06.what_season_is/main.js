@@ -1,20 +1,25 @@
 let input = document.querySelector('.season');
 let btn = document.querySelector('.btn');
 let image = document.getElementById('image');
+let text = document.querySelector('.text');
 console.log(image);
-let seasons = ["Декабрь", "Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь"];
 
 btn.addEventListener('click', function(e) {
-    console.log(input.value);
-    if ((seasons.indexOf(input.value) < 3)) {
-        image.setAttribute("src", "winter.jpg");
-    } else if (input.value === ("Март" || "Апрель" || "Май")){
-        image.setAttribute("src", "spring.jpg");
-    } else if (input.value === ("Июнь" || "Июль" || "Август")) {
-        image.setAttribute("src", "summer.jpg");
-    } else if (input.value === ("Сентябрь" || "Октябрь" || "Ноябрь")) {
-        image.setAttribute("src", "autumn.jpg");
+    let month =  input.value;
+    if (month === "Январь" || month === "Февраль" || month === "Декабрь") {
+        image.setAttribute("src", "img/winter.jpg");
+        text.innerHTML = "зима";
+    } else if (month === "Март" || month === "Апрель" || month === "Май"){
+        image.setAttribute("src", "img/spring.jpg");
+        text.innerHTML = "весна";
+    } else if (month === "Июнь" || month === "Июль" || month === "Август") {
+        image.setAttribute("src", "img/summer.jpg");
+        text.innerHTML = "лето";
+    } else if (month === "Сентябрь" || month === "Октябрь" || month === "Ноябрь") {
+        image.setAttribute("src", "img/autumn.jpg");
+        text.innerHTML = "осень";
     } else {
-        image.setAttribute("src", "seasons.jpg");
+        image.setAttribute("src", "img/seasons.jpg");
+        text.innerHTML = "";
     }
 });

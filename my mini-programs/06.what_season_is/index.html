@@ -32,13 +32,23 @@
       line-height: 40px;
       width: 250px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-right: none;
     }
     button {
       display: inline-block;
       height: 40px;
+      background-color: #cfa15b;
+      border: none;
+      cursor: pointer;
     }
 
     div {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
       width: 600px;
       height: 600px;
     }
@@ -49,6 +59,14 @@
       object-fit: cover;
       object-position: center;
     }
+
+    p {
+      position: absolute;
+      font-size: 80px;
+      font-weight: 700;
+      /*color: #d6bc7a;*/
+      text-transform: uppercase;
+    }
   </style>
 </head>
 <body>
@@ -57,10 +75,11 @@
       Введите месяц года:
       <input class="season" type="text" placeholder='например, "Январь"'>
     </label>
-    <button class="btn" type="button">Отправить</button>
+    <button class="btn" type="button">Узнать сезон</button>
   </form>
   <div>
-    <img id="image" src="seasons.jpg" alt="время года">
+    <img id="image" src="img/seasons.jpg" alt="время года">
+    <p class="text"></p>
   </div>
   <script src="main.js"></script>
 </body>
