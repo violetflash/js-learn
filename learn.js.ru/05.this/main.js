@@ -23,3 +23,4 @@ let admin = {
 }
 
 admin.sayHi();
+
