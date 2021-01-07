@@ -6,12 +6,26 @@
 
 function testCycle(n) {
     let x = "Простое число";
-    for (let i = 2; i < n / 2; i++) {
+    for (let i = 2; i * i < n; i++) {  // Перебор до квадратного корня
         if (n % i === 0) {
             x = "Составное число";
             break;
         }
     }
+    return x;
+}
+
+/*
+Через решето эратосфена выписать все простые
+*/
+
+function checkPrime(n) {
+    let x = [];
+    let primes = [];
+    for (let i = 0; i < n + 1; i++) {
+        x[i] = true;
+    }
+    
     return x;
 }
 
