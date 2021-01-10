@@ -18,14 +18,21 @@ function testCycle(n) {
 /*
 Через решето эратосфена выписать все простые
 */
-
 function checkPrime(n) {
-    let x = [];
+    let sieve = [];
     let primes = [];
     for (let i = 0; i < n + 1; i++) {
-        x[i] = true;
+        sieve[i] = true;
     }
-    
-    return x;
+    sieve[0] = sieve[1] = false;
+
+    for (let i = 2; i < n + 1; i++) {
+        if (sieve[i] === true) {
+            for (let j = 2 * i; j < n + 1; j++) {
+                sieve[j] = false;
+            }
+        }
+    }
+    return sieve;
 }
 
