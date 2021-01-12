@@ -13,27 +13,27 @@ mul() возвращает произведение введённых свой�
 
 
 let Calculator = function() {
-    this.read = () => {
-        first:
-            while (true) {
-                this.x = +prompt("Введите первое число", );
-                if (isNaN(this.x)) continue;
-                while (true) {
-                    this.y = +prompt("Введите второе число", );
-                    if (!isNaN(this.y)) break first;
-                }
-            }
-    };
-    this.sum = () => {
-        return this.x + this.y;
-    };
-    this.mul = () => {
-        return this.x * this.y;
-    };
+  this.read = () => {
+    first:
+      while (true) {
+        this.x = +prompt("Введите первое число",);
+        if (isNaN(this.x)) continue;
+        while (true) {
+          this.y = +prompt("Введите второе число",);
+          if (!isNaN(this.y)) break first;
+        }
+      }
+  };
+  this.sum = () => {
+    return this.x + this.y;
+  };
+  this.mul = () => {
+    return this.x * this.y;
+  };
 }
 
 let calculator = new Calculator();
 
 calculator.read();
-alert( `${calculator.x} + ${calculator.y} = ` + calculator.sum() );
-alert( `${calculator.x} * ${calculator.y} = ` + calculator.mul() );
+alert(`${calculator.x} + ${calculator.y} = ` + calculator.sum());
+alert(`${calculator.x} * ${calculator.y} = ` + calculator.mul());
