@@ -23,6 +23,21 @@ function hideAnswer(word) {
   return answerArray;
 }
 
+function showProgress(answerArray) {
+  alert(`Загаданное слово: ${answerArray.join(" ")}`);
+}
+
+function updateAnswer(word, guess, answerArray) {
+  let count = 0;
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === guess) {
+      answerArray[i] = guess;
+      count++;
+    }
+  }
+  return count;
+}
+
 function game() {
   const word = generateWord();
   let answerArray = hideAnswer(word);
@@ -32,7 +47,7 @@ function game() {
 
 
   while (remainingLetters > 0) {
-    alert(`Загаданное слово: ${answerArray.join(" ")}`);
+    showProgress(answerArray);
     let guess = prompt(`Угадайте букву или нажмите "Отмена" для выхода из игры:`, "");
 
     if (guess === null) {
@@ -42,21 +57,18 @@ function game() {
     } else if (!isNaN(guess)) {
       alert(`Принимаются только БУКВЫ!`);
     } else {
+
       //Обновление состояния игры
       attempts++;
       //проверяем, что эта буква еще не отгадана
       if (answerArray.indexOf(guess) === -1) {
-        for (let i = 0; i < word.length; i++) {
-          if (word[i] === guess) {
-            answerArray[i] = guess;
-            remainingLetters--;
-          }
-        }
+        let correctGuesses = updateAnswer(word, guess, answerArray);
+        remainingLetters -= correctGuesses;
       }
     }
   }
-  alert(answerArray.join(" "));
-  alert("Отлично! Было загадано слово " + word);
+  showProgress(answerArray);
+  alert("Отлично! Было загадано слово " + word + ". Попыток понадобилось: " + attempts);
   alert(`Пока!`);
 }
 
