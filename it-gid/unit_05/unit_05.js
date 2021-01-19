@@ -105,10 +105,11 @@ document.querySelector('.b-6').onclick = t6;
 
 function t7() {
     let num = document.querySelector('.i-7').value;
-    let out = document.querySelector('.out-7');
+    let str = "";
     for (let i = num; i >= 0; i--) {
-        out.innerHTML += i + " ";
+        str += i + " ";
     }
+    document.querySelector('.out-7').innerHTML = str;
 }
 
 document.querySelector('.b-7').onclick = t7;
@@ -125,10 +126,11 @@ document.querySelector('.b-7').onclick = t7;
 function t8() {
     let min = document.querySelector('.i-81').value;
     let max = document.querySelector('.i-82').value;
-    let out = document.querySelector('.out-8');
+    let str = "";
     for (let i = min; i <= max; i++) {
-        out.innerHTML += i + " ";
+        str += i + " ";
     }
+    document.querySelector('.out-8').innerHTML = str;
 }
 
 document.querySelector('.b-8').onclick = t8;
@@ -149,10 +151,12 @@ function t9() {
     let num2 = document.querySelector('.i-92').value;
     let max = ( num1 > num2) ? num1: num2;
     let min = ( num1 > num2) ? num2: num1;
-    let out = document.querySelector('.out-9');
+    let str = "";
     for (let i = min; i <= max; i++) {
-        out.innerHTML += i + " ";
+        str += i + " ";
     }
+    document.querySelector('.out-9').innerHTML = str;
+
 }
 
 document.querySelector('.b-9').onclick = t9;

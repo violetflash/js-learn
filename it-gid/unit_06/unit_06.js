@@ -6,7 +6,14 @@
 // <p>где звездочки рисуются с помощью внутреннего цикла от 0 до 3, а _ с помощью внешнего.</p>
 
 function t1() {
-
+    let str = "";
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            str += "*";
+        }
+        str += "_"
+    }
+    document.querySelector('.out-1').innerHTML = str;
 }
 
 document.querySelector('.b-1').onclick = t1;
@@ -23,7 +30,14 @@ document.querySelector('.b-1').onclick = t1;
 // </pre>
 // <p>Решить задачу с помощью вложенных циклов. Внешний цикл выводит цифры и перенос строки br, , второй звездочки, знак подчеркивания и знак переноса.</p>
 function t2() {
-
+    let str = "";
+    for (let i = 0; i < 3; i++) {
+        str += `${i+1}<br>`
+        for (let j = 0; j < 3; j++) {
+            str += (j === 2)? "*_<br>" : "*_";
+        }
+    }
+    document.querySelector('.out-2').innerHTML = str;
 }
 
 document.querySelector('.b-2').onclick = t2;
@@ -39,7 +53,14 @@ document.querySelector('.b-2').onclick = t2;
 // </pre>
 // <p>Решить задачу с помощью вложенных циклов. Внешний цикл выводит перенос строки br,  внутренний -  звездочки, знак подчеркивания.</p>
 function t3() {
-
+    let str = "";
+    for (let i = 0; i < 4; i++) {
+        for (let j = 0; j < 3; j++) {
+            str += "*_";
+        }
+        str += `<br>`
+    }
+    document.querySelector('.out-3').innerHTML = str;
 }
 
 document.querySelector('.b-3').onclick = t3;
@@ -50,7 +71,14 @@ document.querySelector('.b-3').onclick = t3;
 // 1_1 2 3 4 5 2_1 2 3 4 5 3_1 2 3 4 5
 // </pre>
 function t4() {
-
+    let str = "";
+    for (let i = 1; i < 4; i++) {
+        str += `${i}_`
+        for (let j = 1; j < 6; j++) {
+            str += `${j} `;
+        }
+    }
+    document.querySelector('.out-4').innerHTML = str;
 }
 
 document.querySelector('.b-4').onclick = t4;
@@ -65,7 +93,14 @@ document.querySelector('.b-4').onclick = t4;
 // </pre>
 // <p>Внешний цикл выводит перенос строки br. Вложенный цикл от 0 до 6 выводит либо 0 либо 1.</p>
 function t5() {
-
+    let str = "";
+    for (let i = 1; i < 4; i++) {
+        str += `${i}_`
+        for (let j = 1; j < 6; j++) {
+            str += `${j} `;
+        }
+    }
+    document.querySelector('.out-4').innerHTML = str;
 }
 
 document.querySelector('.b-5').onclick = t5;
