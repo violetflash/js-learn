@@ -6,10 +6,10 @@
 
 function t1() {
     let str = "";
-    count = 1;
-    while ( count <= 50 ) {
-        str += count + " ";
+    let count = 0;
+    while ( count < 50 ) {
         count++;
+        str += `${count} `;
     }
     document.querySelector(".out-1").textContent = str;
 }
@@ -23,9 +23,9 @@ document.querySelector('.b-1').onclick = t1;
 
 function t2() {
     let str = "";
-    count = 2;
+    let count = 2;
     while ( count <= 122 ) {
-        str += count + " ";
+        str += `${count} `;
         count += 2;
     }
     document.querySelector(".out-2").textContent = str;
@@ -41,9 +41,9 @@ document.querySelector('.b-2').onclick = t2;
 
 function t3() {
     let str = "";
-    count = 25;
+    let count = 25;
     while ( count >= 7 ) {
-        str += count + " ";
+        str += `${count} `;
         count--;
     }
     document.querySelector(".out-3").textContent = str;
@@ -58,7 +58,13 @@ document.querySelector('.b-3').onclick = t3;
 
 
 function t4() {
-
+    let str = "";
+    let count = 77;
+    while ( count >= 35 ) {
+        str += `${count}_`;
+        count -= 3;
+    }
+    document.querySelector(".out-4").textContent = str;
 }
 
 document.querySelector('.b-4').onclick = t4;
@@ -70,7 +76,13 @@ document.querySelector('.b-4').onclick = t4;
 // от 1 до 17 c шагом 1. Разделитель - знак подчеркивания и звездочка (если число нечетное, и две звездочки если четное). Задача решается с помощью цикла  while.
 
 function t5() {
-
+    let str = "";
+    let count = 0;
+    while ( count < 17 ) {
+        count++;
+        str += (count % 2 === 0) ? `${count}_**` : `${count}_*`;
+    }
+    document.querySelector(".out-5").textContent = str;
 }
 
 document.querySelector('.b-5').onclick = t5;
@@ -85,7 +97,14 @@ document.querySelector('.b-5').onclick = t5;
 // Количество строк (итераций, повторений) цикла  while вводит пользователь в i-6.
 
 function t6() {
-
+    let num = +document.querySelector('.i-6').value;
+    let str = "";
+    let count = 0;
+    while ( count < num ) {
+        count++;
+        str += `******<br>`;
+    }
+    document.querySelector(".out-6").innerHTML = str;
 }
 
 document.querySelector('.b-6').onclick = t6;
@@ -99,7 +118,14 @@ document.querySelector('.b-6').onclick = t6;
 // Задача решается с помощью цикла  while.
 
 function t7() {
-
+    let num = +document.querySelector('.i-7').value;
+    let str = "";
+    let count = num;
+    while ( count >= 0 ) {
+        str += `${count} `;
+        count--;
+    }
+    document.querySelector(".out-7").innerHTML = str;
 }
 
 document.querySelector('.b-7').onclick = t7;
@@ -114,7 +140,15 @@ document.querySelector('.b-7').onclick = t7;
 // Задача решается с помощью цикла  while.
 
 function t8() {
-
+    let min = +document.querySelector('.i-81').value;
+    let max = +document.querySelector('.i-82').value;
+    let str = "";
+    let count = min;
+    while ( count <= max ) {
+        str += `${count} `;
+        count++;
+    }
+    document.querySelector(".out-8").innerHTML = str;
 }
 
 document.querySelector('.b-8').onclick = t8;
@@ -130,7 +164,17 @@ document.querySelector('.b-8').onclick = t8;
 // Задача решается с помощью цикла. Подсказка - вначале делаем проверку, а потом запускаем цикл  while.
 
 function t9() {
-
+    let num1 = +document.querySelector('.i-91').value;
+    let num2 = +document.querySelector('.i-92').value;
+    let max = ( num1 > num2 ) ? num1 : num2;
+    let min = ( num1 > num2 ) ? num2 : num1;
+    let str = "";
+    let count = min;
+    while ( count <= max ) {
+        str += `${count} `;
+        count++;
+    }
+    document.querySelector(".out-9").innerHTML = str;
 }
 
 document.querySelector('.b-9').onclick = t9;
@@ -141,7 +185,13 @@ document.querySelector('.b-9').onclick = t9;
 // Разделитель - пробел. Задача решается через цикл, а четность - через шаг (равный 2).
 
 function t10() {
-
+    let str = "";
+    let count = 1950;
+    while ( count <= 2000 ) {
+        str += `${count} `;
+        count += 2;
+    }
+    document.querySelector(".out-10").innerHTML = str;
 }
 
 document.querySelector('.b-10').onclick = t10;
@@ -156,7 +206,14 @@ document.querySelector('.b-10').onclick = t10;
 
 
 function t11() {
-
+    let divs = document.querySelectorAll('.div-11');
+    let str = "";
+    let count = 0;
+    while ( count < divs.length ) {
+        str += `${divs[count].innerHTML} `;
+        count++;
+    }
+    document.querySelector(".out-11").innerHTML = str;
 }
 
 document.querySelector('.b-11').onclick = t11;
@@ -169,7 +226,12 @@ document.querySelector('.b-11').onclick = t11;
 
 
 function t12() {
-
+    let divs = document.querySelectorAll('.div-12');
+    let count = 0;
+    while ( count < divs.length ) {
+        divs[count].style.background = "orange";
+        count++;
+    }
 }
 
 document.querySelector('.b-12').onclick = t12;
@@ -181,7 +243,12 @@ document.querySelector('.b-12').onclick = t12;
 // применить к каждому elem[i].value, причем к value первого должно равняться 1, второго - 2, третьего - 3...
 
 function t13() {
-
+    let inputs = document.querySelectorAll('.i-13');
+    let count = 0;
+    while ( count < inputs.length ) {
+        inputs[count].value = count + 1;
+        count++;
+    }
 }
 
 document.querySelector('.b-13').onclick = t13;
@@ -194,7 +261,16 @@ document.querySelector('.b-13').onclick = t13;
 
 
 function t14() {
-
+    let inputs = document.querySelectorAll('.i-14');
+    let str = "";
+    let count = 0;
+    while ( count < inputs.length ) {
+        if (inputs[count].checked) {
+            str = inputs[count].value;
+        }
+        count++;
+    }
+    document.querySelector(".out-14").innerHTML = str;
 }
 
 document.querySelector('.b-14').onclick = t14;
@@ -205,7 +281,13 @@ document.querySelector('.b-14').onclick = t14;
 // Для вывода использовать цикл  while. Разделитель пробел.
 
 function t15() {
-
+    let str = "";
+    let count = 0;
+    while ( count <= 10 ) {
+        str += `${10 - count} ${count} `;
+        count++;
+    }
+    document.querySelector(".out-15").innerHTML = str;
 }
 
 document.querySelector('.b-15').onclick = t15;
