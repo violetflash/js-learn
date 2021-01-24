@@ -2,11 +2,11 @@
 //Создайте массив ar1 содержащий строки, числа, булевы значения. Выведите его в .out-1. Вывод - по нажатию кнопки b-1
 
 // let ar1 = // переменную обьявляем здесь!!!!
-let arr1 = ["a", 1, true, "word", false, 5, "meow"];
+let ar1 = ["a", 1, true, "word", false, 5, "meow"];
 
 function f1() {
     //ваш_элемент.innerHTML = ar1; // да так можно выводить!!!!
-    document.querySelector('.out-1').innerHTML = arr1;
+    document.querySelector('.out-1').innerHTML = ar1;
 }
 
 document.querySelector('.b-1').onclick = f1;
@@ -15,13 +15,13 @@ document.querySelector('.b-1').onclick = f1;
 //Создайте массив ar2 содержащий строки, числа, булевы значения. Выведите его в div.out-2. Используйте шаблон вывода из кода в JS. Вывод - по нажатию кнопки b-2
 
 // let ar2 = // переменную обьявляем здесь!!!!
-let arr2 = ["a", 1, true, "word", false, 5, "meow"];
+let ar2 = ["a", 1, true, "word", false, 5, "meow"];
 
 
 function f2() {
     let out = '';
-    for (let i = 0; i < arr2.length; i++) {
-        out += `${arr2[i]} `;
+    for (let i = 0; i < ar2.length; i++) {
+        out += `${ar2[i]} `;
     }
     document.querySelector('.out-2').innerHTML = out;
 }
@@ -35,10 +35,10 @@ document.querySelector('.b-2').onclick = f2;
 // Тест допустим массив [1,2,3] вывод - 3
 
 // let ar3 =  // переменную обьявляем здесь!!!!
-let arr3 = ["a", 1, true, "word", false, 5, "meow"];
+let ar3 = ["a", 1, true, "word", false, 5, "meow"];
 
 function f3() {
-    document.querySelector('.out-3').innerHTML = arr3.length;
+    document.querySelector('.out-3').innerHTML = ar3.length;
 }
 
 document.querySelector('.b-3').onclick = f3;
@@ -51,16 +51,10 @@ document.querySelector('.b-3').onclick = f3;
 // Тест допустим массив [1,2,3,4,5,6,7,8,9,10] вывод: 1 4 9
 
 // let ar4 =  // переменную обьявляем эту здесь!!!!
-let arr4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let ar4 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 function f4() {
-    str = "";
-    for (let i = 0; i < arr4.length; i++) {
-        if ( i === 0 || i === 3 || i === 8) {
-            str += `${arr4[i]} `;
-        }
-    }
-    document.querySelector('.out-4').innerHTML = str;
+    document.querySelector('.out-4').innerHTML = `${ar4[0]} ${ar4[3]} ${ar4[8]}`;
 }
 
 document.querySelector('.b-4').onclick = f4;
@@ -72,17 +66,11 @@ document.querySelector('.b-4').onclick = f4;
 // Вывод в out-5
 // Тест допустим массив [1,2,3,4,5,6,7,8,9,10] вывод: 8
 
-let arr5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let ar5 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 
 function f5() {
-    str = 0;
-    for (let i = 0; i < arr4.length; i++) {
-        if ( i === 0 || i === 2 || i === 3) {
-            str += arr4[i];
-        }
-    }
-    document.querySelector('.out-5').innerHTML = str;
+    document.querySelector('.out-5').innerHTML = ar5[0] + ar5[2] + ar5[3];
 }
 
 document.querySelector('.b-5').onclick = f5;
@@ -93,12 +81,12 @@ document.querySelector('.b-5').onclick = f5;
 // Вывод - по нажатию кнопки b-6
 // Вывод в out-6
 
-let arr6 = ["alex", "gemini", 25, "may"];
+let ar6 = ["alex", "gemini", 25, "may"];
 
 function f6() {
-    str = "";
-    for (let i = 0; i < arr6.length; i++) {
-        str += `${arr6[i]} `
+    let str = "";
+    for (let i = 0; i < ar6.length; i++) {
+        str += `${ar6[i]} `
     }
     document.querySelector('.out-6').innerHTML = str;
 }

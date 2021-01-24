@@ -98,7 +98,6 @@ document.querySelector('.b-6').onclick = f6;
 let d7 = ['china', 'india', 'brazil', 'japan', 'egypt'];
 
 function f7() {
-    let input = document.querySelector('.i-7');
     let arr = [];
     for (let i = 0; i < d7.length - 1; i++) {
         arr[arr.length] = d7[i];
@@ -138,7 +137,6 @@ document.querySelector('.b-8').onclick = f8;
 let d9 = [100, 200, 300, 400, 700, 121];
 
 function f9() {
-    let input = document.querySelector('.i-9');
     let arr = [];
     for (let i = 1; i < d9.length; i++) {
         arr[arr.length] = d9[i];
@@ -291,7 +289,9 @@ let d171 = ['a', 'b', 'c', 'd'];
 let d172 = [1, 2, 3, 4, 5];
 
 function f17() {
-
+    for (let i = 0; i < d171.length + d172.length; i++) {
+        d17[d17.length] = (i < d171.length) ? d171[i] : d172[i-d171.length];
+    }
     showArr('.out-17', d17);
 }
 
@@ -307,7 +307,8 @@ document.querySelector('.b-17').onclick = f17;
 let d18 = ['b', 'c', '45', 'e', 'z', 'y'];
 
 function f18() {
-
+    let num = document.querySelector('.i-18').value;
+    document.querySelector('.out-18').innerHTML = d18.includes(num);
 }
 
 document.querySelector('.b-18').onclick = f18;
@@ -323,7 +324,13 @@ let d19 = ['Your', 'payment', 'method', 'will', 'automatically', 'be', 'charged'
 let maxString = '';
 
 function f19() {
-
+    maxString = d19[0];
+    for (let i = 0; i < d19.length; i++) {
+        if ( maxString.length < d19[i].length ) {
+            maxString = d19[i];
+        }
+    }
+    document.querySelector('.out-19').innerHTML = maxString;
 }
 
 document.querySelector('.b-19').onclick = f19;
@@ -337,7 +344,7 @@ document.querySelector('.b-19').onclick = f19;
 let d20 = [4, 5, 6, 7, 8, 9, 10];
 
 function f20() {
-
+    document.querySelector('.out-20').innerHTML = d20.join("");
 }
 
 document.querySelector('.b-20').onclick = f20;
