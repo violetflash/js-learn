@@ -1,6 +1,53 @@
-html, body {
-    font-family: serif;
+html {
+    box-sizing: border-box;
 }
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 body {
-    margin: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.label {
+    padding: 20px;
+    border-bottom: 2px solid #4dabb7;
+    font-weight: 600;
+    color: #c89c74;
+}
+
+.label:last-child {
+    border-bottom: none;
+}
+
+.value {
+    margin: 5px 0 0;
+    color: #000;
+    text-align: right;
+}
+
+.temp::after {
+    /*content: " °C";*/
+    font-weight: 400;
+}
+
+.weather {
+    margin-top: 100px;
+    max-width: 200px;
+    width: 100%;
+    border: 2px solid #4dabb7;
+}
+
+.weather__city {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.weather__clouds-img {
+    display: block;
 }

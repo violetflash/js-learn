@@ -6,17 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Погода</title>
 </head>
-
 <body>
-    <div>
-        <p>Task 1. Создайте переменную a = 4. Используя конструкцию if проверьте то a == 4. Выведите сообщение в
-            консоль.</p>
-        <button class="task-1">button</button>
-    </div>
-    <hr>
+    <div class="weather">
+        <div class="weather__city-label label">город
+            <p class="weather__city value"></p>
+        </div>
+        <div class="weather__temp-label label">температура
+            <div class="weather__temp value temp"></div>
+        </div>
+        <div class="weather__clouds-label label">облачность
+            <img class="weather__clouds-img" src="">
+            <div class="weather__clouds value"></div>
 
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
