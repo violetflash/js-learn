@@ -45,11 +45,6 @@ justify-content: center;
     border: 2px solid #4dabb7;
 }
 
-.weather__option {
-    margin-left: 10px;
-    outline: transparent;
-}
-
 .weather__city {
     margin: 10px 0 0;
     display: block;
