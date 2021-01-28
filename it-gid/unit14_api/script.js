@@ -1,5 +1,51 @@
 let weather_option = document.querySelector(".weather__option");
 let method = `weather`;
+let daysNum;
+
+function createSelect() {
+
+    let hours = document.createElement("label");
+    hours.className = "select-label";
+    hours.style.display = "block";
+    hours.style.marginTop = "10px";
+    hours.innerHTML = `кол-во часов (от 1 до 3) 
+<select class="weather__hours">
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>`;
+
+return hours;
+}
+
+function chooseMethod() {
+
+    if ( weather_option.value === "current" && document.querySelector("label") ) {
+        method = `weather`;
+        document.querySelector("label").remove();
+    } else if (weather_option.value === "forecast" && !document.querySelector(".weather__hours")) {
+        method = `forecast`;
+        weather_option.after(createSelect());
+    }
+}
+
+weather_option.onchange = chooseMethod;
+
+function getHours() {
+    let hours = document.querySelector(".weather__hours");
+    let hoursNum = hours.value;
+    console.log(hoursNum);
+}
+
+if ( document.querySelector(".weather__hours") ) {
+    document.querySelector(".weather__hours").onchange = getHours;
+}
+
+
+
+
+/*
+let method = `weather`;
 let days = document.createElement("label");
 days.style.display = "block";
 days.style.marginTop = "10px";
@@ -53,6 +99,7 @@ if ( document.querySelector(".weather__days") ) {
 
 let city = document.querySelector(".weather__city");
 let baselink = `http://api.openweathermap.org/data/2.5/`;
+ */
 
 document.querySelector('.weather__city').onchange = () => {
     fetch(`${baselink}${method}?id=${city.value}&cnt=${daysNum}&appid=ef055dc2a3ce7e62285e867ad3dd0302`)
