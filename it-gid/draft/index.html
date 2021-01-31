@@ -4,14 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Guess Number</title>
-  <script>
+  <title>get value</title>
 
-  </script>
 </head>
 <body>
-  <button class="btn">click</button>
-  <div class="out"></div>
-  <script src="main.js"></script>
+  <select class="main-select">
+    <option>As is</option>
+    <option>With option</option>
+  </select>
+  <p class="field">As is</p>
+
+
+  <script>
+    let mainSelect = document.querySelector(".main-select");
+    let field = document.querySelector(".field");
+
+    mainSelect.addEventListener("change", function(e) {
+
+      if ( document.querySelector('.sub-select') ) {
+        document.querySelector('.sub-select').remove();
+        field.textContent = `${mainSelect.value}`;
+      } else {
+        mainSelect.after(createSubSelect());
+        field.textContent = `${mainSelect.value}: ${document.querySelector('.sub-select').value}`;
+        document.querySelector('.sub-select').addEventListener('change', function(e) {
+          field.textContent = `${mainSelect.value}: ${document.querySelector('.sub-select').value}`
+        });
+      }
+
+    });
+
+    function createSubSelect() {
+      let subSelect = document.createElement("select");
+      subSelect.className = "sub-select";
+      subSelect.style.display = "block";
+      subSelect.style.marginTop = "10px";
+      subSelect.innerHTML = '' +
+        '<option value="1">option 1</option>' +
+        '<option value="2">option 2</option>' +
+        '<option value="3">option 3</option>'
+      ;
+
+      return subSelect;
+    }
+  </script>
 </body>
 </html>

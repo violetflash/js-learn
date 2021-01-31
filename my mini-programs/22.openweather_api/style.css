@@ -14,14 +14,14 @@ align-items: center;
 justify-content: center;
 }
 
-.label {
+.block {
     padding: 20px;
     border-bottom: 1px solid #4dabb7;
     font-weight: 600;
     color: #c89c74;
 }
 
-.label:last-child {
+.block:last-child {
     border-bottom: none;
 }
 

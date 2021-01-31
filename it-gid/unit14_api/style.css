@@ -14,14 +14,14 @@ align-items: center;
 justify-content: center;
 }
 
-.label {
+.block {
     padding: 20px;
     border-bottom: 1px solid #4dabb7;
     font-weight: 600;
     color: #c89c74;
 }
 
-.label:last-child {
+.block:last-child {
     border-bottom: none;
 }
 
@@ -44,10 +44,35 @@ justify-content: center;
     /*width: 100%;*/
     border: 2px solid #4dabb7;
 }
+.weather__date {
+    padding: 20px;
+    font-weight: 700;
+    font-size: 20px;
+    text-align: center;
+    border-bottom: 1px solid #4dabb7;
+}
 
 .weather__option {
     margin-left: 10px;
     outline: transparent;
+}
+
+.weather__btn {
+    display: block;
+    margin: 10px 0 0;
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    cursor: pointer;
+    outline: transparent;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #4dabb7;
+}
+
+.weather__btn:hover {
+    background-color: #4dabb7;
+    border-color: #4dabb7;
+    color: #fff;
 }
 
 .weather__city {
