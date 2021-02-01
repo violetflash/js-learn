@@ -1,7 +1,9 @@
 let weather_option = document.querySelector(".weather__option");
+let weatherValues = document.querySelectorAll('.value');
 let baseLink = `http://api.openweathermap.org/data/2.5/`;
 let city = document.querySelector(".weather__city");
 let method = `weather`;
+let forecast = false;
 let hoursNum = 1;
 
 document.querySelector(".date").textContent = getDate();
@@ -96,7 +98,7 @@ function getDate() {
     }
   }
 
-  return `${date.getDate()} ${month} ${date.getFullYear()}, ${day}`;
+  return `${date.getDate()} ${month} ${date.getFullYear()}, ${day}. ${date.getHours()}:${date.getMinutes()}`;
 }
 
 function getWeather() {
@@ -106,12 +108,11 @@ function getWeather() {
     })
     .then(function(data) {
       console.log(data);
-      // document.querySelector(".weather__city").textContent = data.name;
-      document.querySelector(".weather__temp").innerHTML = Math.round(data.main.temp - 273) + " " + "&#8451";
-      document.querySelector(".weather__clouds").textContent = data.weather[0].description;
-      document.querySelector(".weather__humidity").textContent = data.main.humidity + " %";
-      document.querySelector(".weather__wind").textContent = Math.round(data.wind.speed) + " м/с";
-      let img = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+      document.querySelector(".weather__temp").innerHTML = (forecast) ? Math.round(data.list[0].main.temp - 273) + " " + "&#8451" : Math.round(data.main.temp - 273) + " " + "&#8451";
+      document.querySelector(".weather__clouds").textContent = (forecast) ? data.list[0].weather[0].description : data.weather[0].description;
+      document.querySelector(".weather__humidity").textContent = (forecast) ? data.list[0].main.humidity + " %" : data.main.humidity + " %";
+      document.querySelector(".weather__wind").textContent = (forecast) ? Math.round(data.list[0].wind.speed) + " м/с" : Math.round(data.wind.speed) + " м/с";
+      let img = (forecast) ? `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png` : `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
       document.querySelector(".weather__clouds-img").setAttribute("src", img);
     })
     .catch(function() {
@@ -124,44 +125,57 @@ function createSelect() {
   hours.className = "select-label";
   hours.style.display = "block";
   hours.style.marginTop = "10px";
-  hours.innerHTML = `кол-во часов (от 1 до 3) 
+  hours.innerHTML = `Дальность  
 <select class="weather__hours">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
+  <option value="2">+3 часа</option>
+  <option value="3">+6 часов</option>
 </select>`;
   // hours.innerHTML += `<button class="weather__btn">Обновить</button>`
   return hours;
 }
 
-function createHoursForecast() {
-  let newValue = document.createElement('div');
-  newValue.className = "new-value";
-  newValue.innerHTML = "test";
-  let values = document.querySelectorAll('.value');
-  for (let j = 0; j < values.length ; j++) {
-    values[j].after(newValue);
+function createForecasts(select) {
+  for (let i = 0; i < weatherValues.length; i++) {
+    for (let j = 0; j < select.value-1; j++) {
+      let newValue = document.createElement('div');
+      newValue.className = "new-value";
+      newValue.innerHTML = "Время:";
+      weatherValues[i].after(newValue);
+    }
   }
-
 }
+
+function removeElementsByClass(className){
+  var elements = document.getElementsByClassName(className);
+  while(elements.length > 0){
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+}
+
 
 weather_option.addEventListener('change', function(e) {
   if ( weather_option.value === "current" && document.querySelector('.select-label') ) {
+    removeElementsByClass("new-value");
     document.querySelector('.select-label').remove();
     method = `weather`;
-    // hoursNum = 1;
+    forecast = false;
   } else if ( weather_option.value === "forecast" ) {
     method = `forecast`;
+    forecast = true;
     weather_option.after(createSelect());
+
     let hoursSelect = document.querySelector('.weather__hours');
+    createForecasts(hoursSelect);
     hoursSelect.addEventListener('change', function(e) {
-      if ( document.querySelector('.new-value') ) {
-        document.querySelector('.new-value').remove();
-      }
-      for (let i = 0; i < hoursSelect.value; i++) {
-        createHoursForecast();
-      }
+      //создание блоков для почасовой погоды =======
+      removeElementsByClass("new-value"); // сначала очистка
+      createForecasts(hoursSelect);
+
+      //==========================
+
+
       hoursNum = hoursSelect.value;
+      console.log(hoursNum);
       getWeather();
     });
   }

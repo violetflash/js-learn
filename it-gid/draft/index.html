@@ -5,7 +5,19 @@
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>get value</title>
+  <style>
+    .box {
+      margin: 0 0 10px;
+      width: 150px;
+      height: 40px;
+      background-color: #000;
+    }
 
+    .input {
+      display: block;
+      margin: 0 0 10px;
+    }
+  </style>
 </head>
 <body>
   <select class="main-select">
@@ -13,26 +25,34 @@
     <option>With option</option>
   </select>
   <p class="field">As is</p>
-
+  <input class="input" type="text">
+  <input class="input" type="text">
 
   <script>
     let mainSelect = document.querySelector(".main-select");
     let field = document.querySelector(".field");
 
-    mainSelect.addEventListener("change", function(e) {
+    mainSelect.addEventListener("change", function (e) {
 
-      if ( document.querySelector('.sub-select') ) {
+      if (document.querySelector('.sub-select')) {
         document.querySelector('.sub-select').remove();
         field.textContent = `${mainSelect.value}`;
       } else {
         mainSelect.after(createSubSelect());
         field.textContent = `${mainSelect.value}: ${document.querySelector('.sub-select').value}`;
-        document.querySelector('.sub-select').addEventListener('change', function(e) {
+        document.querySelector('.sub-select').addEventListener('change', function (e) {
           field.textContent = `${mainSelect.value}: ${document.querySelector('.sub-select').value}`
         });
       }
 
     });
+
+    let inputs = document.querySelectorAll('.input');
+    for (let i = 0; i < inputs.length; i++) {
+      let box = document.createElement("div");
+      box.className = "box";
+      inputs[i].after(box);
+    }
 
     function createSubSelect() {
       let subSelect = document.createElement("select");
