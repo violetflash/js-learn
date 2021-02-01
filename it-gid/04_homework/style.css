@@ -12,10 +12,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #282c34;
 }
 
 .value {
     margin: 5px 0 0;
+    color: #000;
+    text-align: right;
+}
+
+.new-value {
+    margin: 5px 0;
     color: #000;
     text-align: right;
 }
@@ -32,10 +39,11 @@ body {
     /*max-width: 200px;*/
     /*width: 100%;*/
     border: 2px solid #4dabb7;
+    background-color: #fff;
 }
 
 .weather__block {
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #4dabb7;
     font-weight: 600;
     color: #c89c74;
@@ -89,6 +97,15 @@ body {
 
 
 .weather__clouds-img {
+    margin-left: auto;
     display: block;
+}
+
+.clouds-img_1,
+.clouds-img_2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
 
 }

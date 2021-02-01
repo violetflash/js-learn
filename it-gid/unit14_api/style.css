@@ -9,24 +9,20 @@ html {
 }
 
 body {
-display: flex;
-align-items: center;
-justify-content: center;
-}
-
-.block {
-    padding: 20px;
-    border-bottom: 1px solid #4dabb7;
-    font-weight: 600;
-    color: #c89c74;
-}
-
-.block:last-child {
-    border-bottom: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #282c34;
 }
 
 .value {
     margin: 5px 0 0;
+    color: #000;
+    text-align: right;
+}
+
+.new-value {
+    margin: 5px 0;
     color: #000;
     text-align: right;
 }
@@ -37,18 +33,33 @@ justify-content: center;
 }
 
 .weather {
-    margin-top: 100px;
+    margin-top: 20px;
     padding-right: 20px;
     padding-left: 20px;
     /*max-width: 200px;*/
     /*width: 100%;*/
     border: 2px solid #4dabb7;
+    background-color: #fff;
 }
-.weather__date {
+
+.weather__block {
+    padding: 10px;
+    border-bottom: 1px solid #4dabb7;
+    font-weight: 600;
+    color: #c89c74;
+}
+
+.weather__block:last-child {
+    border-bottom: none;
+}
+
+.date {
     padding: 20px;
     font-weight: 700;
     font-size: 20px;
+    line-height: 1.5;
     text-align: center;
+    color: #000;
     border-bottom: 1px solid #4dabb7;
 }
 
@@ -86,6 +97,12 @@ justify-content: center;
 }
 
 
-.weather__clouds-img {
-    display: block;
+.weather__clouds-img,
+.clouds-img_1,
+.clouds-img_2 {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+
 }
