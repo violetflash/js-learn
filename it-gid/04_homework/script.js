@@ -1,9 +1,10 @@
 let weather_option = document.querySelector(".weather__option");
+let weatherBlocks = document.querySelectorAll('.weather__block');
 let weatherValues = document.querySelectorAll('.value');
 let baseLink = `http://api.openweathermap.org/data/2.5/`;
 let city = document.querySelector(".weather__city");
 let method = `weather`;
-let forecast = false;
+let forecast = false; //якорь
 let hoursNum = 1;
 
 document.querySelector(".date").textContent = getDate();
@@ -135,15 +136,23 @@ function createSelect() {
 }
 
 function createForecasts(select) {
-  for (let i = 0; i < weatherValues.length; i++) {
-    for (let j = 0; j < select.value-1; j++) {
-      let newValue = document.createElement('div');
-      newValue.className = "new-value";
-      newValue.innerHTML = "Время:";
-      weatherValues[i].after(newValue);
+  for (let k = 0; k < weatherBlocks.length; k++) {
+    for (let i = 0; i < weatherValues.length; i++) {
+      for (let j = 0; j < select.value - 1; j++) {  //
+        let newValue = document.createElement('div');
+        //На основе класса каждого параметра создается элем-т с отдельным классом для вывода прогноза
+        newValue.className = `${weatherValues[i].className.slice(9, -6)}`;
+        //общий класс для удаления элементов
+        newValue.className += `_${j + 1} new-value`;
+        newValue.innerHTML = `${newValue.className}`;
+        // weatherValues[i].after(newValue);
+      }
+      weatherBlocks[k].append(newValue);
     }
+    // weatherBlocks[k].append(newValue);
   }
 }
+
 
 function removeElementsByClass(className){
   var elements = document.getElementsByClassName(className);
@@ -152,6 +161,9 @@ function removeElementsByClass(className){
   }
 }
 
+function rearrange() {
+
+}
 
 weather_option.addEventListener('change', function(e) {
   if ( weather_option.value === "current" && document.querySelector('.select-label') ) {
@@ -167,11 +179,9 @@ weather_option.addEventListener('change', function(e) {
     let hoursSelect = document.querySelector('.weather__hours');
     createForecasts(hoursSelect);
     hoursSelect.addEventListener('change', function(e) {
-      //создание блоков для почасовой погоды =======
-      removeElementsByClass("new-value"); // сначала очистка
-      createForecasts(hoursSelect);
 
-      //==========================
+      removeElementsByClass("new-value");
+      createForecasts(hoursSelect);
 
 
       hoursNum = hoursSelect.value;
