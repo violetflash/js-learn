@@ -1,5 +1,4 @@
 let weather_option = document.querySelector(".weather__option");
-let weatherBlocks = document.querySelectorAll('.weather__block');
 let weatherValues = document.querySelectorAll('.value');
 let baseLink = `http://api.openweathermap.org/data/2.5/`;
 let city = document.querySelector(".weather__city");
@@ -99,15 +98,17 @@ function getDate() {
     }
   }
 
-  return `${date.getDate()} ${month} ${date.getFullYear()}, ${day}. ${date.getHours()}:${date.getMinutes()}`;
+  return `${date.getDate()} ${month} ${date.getFullYear()}, 
+  ${day}. 
+  ${date.getHours()}:${date.getMinutes()}`;
 }
 
 function getWeather() {
   fetch(`${baseLink}${method}?id=${city.value}&cnt=${hoursNum}&appid=ef055dc2a3ce7e62285e867ad3dd0302`)
-    .then(function(resp) {
+    .then(function (resp) {
       return resp.json();
     })
-    .then(function(data) {
+    .then(function (data) {
       console.log(data);
       document.querySelector(".weather__temp").innerHTML = (forecast) ? Math.round(data.list[0].main.temp - 273) + " " + "&#8451" : Math.round(data.main.temp - 273) + " " + "&#8451";
       document.querySelector(".weather__clouds").textContent = (forecast) ? data.list[0].weather[0].description : data.weather[0].description;
@@ -115,8 +116,17 @@ function getWeather() {
       document.querySelector(".weather__wind").textContent = (forecast) ? Math.round(data.list[0].wind.speed) + " м/с" : Math.round(data.wind.speed) + " м/с";
       let img = (forecast) ? `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png` : `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
       document.querySelector(".weather__clouds-img").setAttribute("src", img);
+      //прогноз
+      if ( document.querySelector(".temp_1") ) {
+        document.querySelector(".temp_1").innerHTML = Math.round(data.list[1].main.temp - 273) + " " + "&#8451";
+        document.querySelector(".clouds_1").textContent = data.list[1].weather[0].description;
+        document.querySelector(".humidity_1").textContent = data.list[1].main.humidity + " %";
+        document.querySelector(".wind_1").textContent = Math.round(data.list[1].wind.speed) + " м/с";
+        let img = `https://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@2x.png`;
+        document.querySelector(".clouds-img_1").setAttribute("src", img); //TODO сетатрибут задается простому ДИВу!
+      }
     })
-    .catch(function() {
+    .catch(function () {
       //catch any errors
     });
 }
@@ -128,7 +138,7 @@ function createSelect() {
   hours.style.marginTop = "10px";
   hours.innerHTML = `Дальность  
 <select class="weather__hours">
-  <option value="2">+3 часа</option>
+  <option value="2">+3 часа</option>  // TODO разобраться с value
   <option value="3">+6 часов</option>
 </select>`;
   // hours.innerHTML += `<button class="weather__btn">Обновить</button>`
@@ -136,53 +146,45 @@ function createSelect() {
 }
 
 function createForecasts(select) {
-  for (let k = 0; k < weatherBlocks.length; k++) {
-    for (let i = 0; i < weatherValues.length; i++) {
-      for (let j = 0; j < select.value - 1; j++) {  //
-        let newValue = document.createElement('div');
-        //На основе класса каждого параметра создается элем-т с отдельным классом для вывода прогноза
-        newValue.className = `${weatherValues[i].className.slice(9, -6)}`;
-        //общий класс для удаления элементов
-        newValue.className += `_${j + 1} new-value`;
-        newValue.innerHTML = `${newValue.className}`;
-        // weatherValues[i].after(newValue);
-      }
-      weatherBlocks[k].append(newValue);
+  for (let i = 0; i < weatherValues.length; i++) {
+    for (let j = 0; j < select.value - 1; j++) {  //
+      let newValue = document.createElement('div');
+      //На основе класса каждого параметра создается элем-т с отдельным классом для вывода прогноза
+      newValue.className = `${weatherValues[i].className.slice(9, -6)}`;
+      //общий класс для удаления элементов
+      newValue.className += `_${j + 1} new-value`;
+      newValue.innerHTML = `${newValue.className}`;
+      // новый блок с данными добавляется в родителя последним
+      weatherValues[i].parentElement.append(newValue);
     }
-    // weatherBlocks[k].append(newValue);
   }
 }
 
-
-function removeElementsByClass(className){
+function removeElementsByClass(className) {
   var elements = document.getElementsByClassName(className);
-  while(elements.length > 0){
+  while (elements.length > 0) {
     elements[0].parentNode.removeChild(elements[0]);
   }
 }
 
-function rearrange() {
-
-}
-
-weather_option.addEventListener('change', function(e) {
-  if ( weather_option.value === "current" && document.querySelector('.select-label') ) {
+weather_option.addEventListener('change', function (e) {
+  if (weather_option.value === "current" && document.querySelector('.select-label')) {
     removeElementsByClass("new-value");
     document.querySelector('.select-label').remove();
     method = `weather`;
     forecast = false;
-  } else if ( weather_option.value === "forecast" ) {
+  } else if (weather_option.value === "forecast") {
     method = `forecast`;
     forecast = true;
     weather_option.after(createSelect());
 
     let hoursSelect = document.querySelector('.weather__hours');
     createForecasts(hoursSelect);
-    hoursSelect.addEventListener('change', function(e) {
+    getWeather();
+    hoursSelect.addEventListener('change', function (e) {
 
       removeElementsByClass("new-value");
       createForecasts(hoursSelect);
-
 
       hoursNum = hoursSelect.value;
       console.log(hoursNum);
@@ -192,6 +194,6 @@ weather_option.addEventListener('change', function(e) {
   getWeather();
 });
 
-city.addEventListener('change', function(e) {
+city.addEventListener('change', function (e) {
   getWeather();
 });
