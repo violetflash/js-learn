@@ -3,7 +3,7 @@ let dateField = document.querySelector(".date");
 let weatherValues = document.querySelectorAll('.value');
 let city = document.querySelector(".weather__city");
 let method = `weather`;
-let forecast = false; //якорь
+let forecast = false; //якорь для смены доступа к объекту погодных данных
 let hoursNum = 1;
 
 document.querySelector(".date").innerHTML = getDate();
@@ -123,13 +123,13 @@ function getWeather() {
 
       //текущая погода
       document.querySelector(".weather__temp").innerHTML = (forecast)
-        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)}, ${Math.round(data.list[0].main.temp - 273)} &#8451`
+        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)} &nbsp &nbsp ${Math.round(data.list[0].main.temp - 273)} &#8451`
         : `${Math.round(data.main.temp - 273)} &#8451`;
-      document.querySelector(".weather__humidity").textContent = (forecast)
-        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)}, ${data.list[0].main.humidity} %`
+      document.querySelector(".weather__humidity").innerHTML = (forecast)
+        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)} &nbsp &nbsp ${data.list[0].main.humidity} %`
         : `${data.main.humidity} %`;
-      document.querySelector(".weather__wind").textContent = (forecast)
-        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)}, ${Math.round(data.list[0].wind.speed)} м/с`
+      document.querySelector(".weather__wind").innerHTML = (forecast)
+        ? `на ${utcToLocale(data.list[0].dt).slice(11,-3)} &nbsp &nbsp ${Math.round(data.list[0].wind.speed)} м/с`
         : `${Math.round(data.wind.speed)} м/с`;
       let img = (forecast)
         ? `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`
@@ -143,9 +143,9 @@ function getWeather() {
         let time = utcToLocale(data.list[i].dt).slice(11,-3);
 
         if ( document.querySelector(`.temp_${i}`) ) {
-          document.querySelector(`.temp_${i}`).innerHTML = `на ${time}, ${Math.round(data.list[i].main.temp - 273)} &#8451`;
-          document.querySelector(`.humidity_${i}`).textContent = `на ${time}, ${data.list[i].main.humidity} %`;
-          document.querySelector(`.wind_${i}`).textContent = `на ${time}, ${Math.round(data.list[i].wind.speed)} м/с`;
+          document.querySelector(`.temp_${i}`).innerHTML = `на ${time} &nbsp &nbsp ${Math.round(data.list[i].main.temp - 273)} &#8451`;
+          document.querySelector(`.humidity_${i}`).innerHTML = `на ${time} &nbsp &nbsp ${data.list[i].main.humidity} %`;
+          document.querySelector(`.wind_${i}`).innerHTML = `на ${time} &nbsp &nbsp ${Math.round(data.list[i].wind.speed)} м/с`;
           let img = `https://openweathermap.org/img/wn/${data.list[i].weather[0].icon}@2x.png`;
           document.querySelector(`.clouds-img_${i}`).innerHTML = `на ${time} <img src=${img} alt="cloudy image"> <div>${data.list[i].weather[0].description}</div>`;
         }
@@ -160,8 +160,6 @@ function getWeather() {
 function createSelect() {
   let hours = document.createElement("div");
   hours.className = "select-label";
-  hours.style.display = "block";
-  hours.style.marginTop = "10px";
   hours.innerHTML = `фильтр 
 <select class="weather__hours">
   <option value="1">+3 часа</option> 
@@ -201,7 +199,7 @@ weather_option.addEventListener('change', function (e) {
     removeElementsByClass("new-value"); //  удаление всех прогнозных блоков
     document.querySelector('.select-label').remove(); //  удаление селекта (фильтра прогноза)
     method = `weather`;
-    forecast = false; //  переключение якоря для смены доступа к объекту погодных данных
+    forecast = false;
   } else if (weather_option.value === "forecast") {
     method = `forecast`;
     forecast = true;
