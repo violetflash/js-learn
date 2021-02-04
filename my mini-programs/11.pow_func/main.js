@@ -17,4 +17,27 @@ function pow() {
 
 
 
-console.log(pow());
+// console.log(pow());
+
+
+
+function pow2(x, n) {
+    let result = 1;
+    for (let i = 0; i < n; i++) {
+        result *= x;
+    }
+    return result;
+}
+
+console.log(pow2(2,3));
+
+
+//С РЕКУРСИЕЙ БЕЗ ЦИКЛА
+function pow3(x,n) {
+    return ( n === 1 ) ? x : x * pow3(x, n-1);  // ( n === 1 ) - База рекурсии. x * pow3(x, n-1) - Шаг рекурсии
+}
+
+//Общее кол-во вызовов функции  - глубина рекурсии
+
+console.log(pow3(3,2));
+
