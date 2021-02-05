@@ -1,38 +1,50 @@
-/*
-Сумма пользовательских чисел
-Создайте скрипт, который запрашивает ввод двух чисел (используйте prompt) и после показывает их сумму.
-P.S. Есть «подводный камень» при работе с типами.
+"use strict"
 
-
-let num1, num2;
-
-do {
-    num1 = +prompt("Enter number 1", 0);
-} while (!isFinite(num1));
-
-do {
-    num2 = +prompt("Enter number 2", 0);
-} while (!isFinite(num2));
-
-alert(`${num1} + ${num2} = ${num1 + num2}`);
-*/
-
-
-/*
-Создайте функцию readNumber, которая будет запрашивать ввод числового значения до тех пор, пока посетитель его не введёт.
-Функция должна возвращать числовое значение.
-Также надо разрешить пользователю остановить процесс ввода, отправив пустую строку или нажав «Отмена». В этом случае функция должна вернуть null.
- */
-
-function readNumber() {
-    let num;
-    do {
-        num = prompt(`Введите число. Для отмены оставьте строку пустой или нажмите "Отмена"`);
-        if ( num === "" || num === null ) {
-            return null;
-        }
-    } while (!isFinite(num));
-    return +num;
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-alert(readNumber());
+function randomizer(min, max) {
+    return Math.floor(min + Math.random() * (max + 1 - min));  // задача из учебника из раздела ЧИСЛА
+}
+
+function scorePrint(count) {
+    let stats = document.createElement("p");
+    stats.style.fontWeight = 700;
+    stats.style.fontSize = "20px";
+    stats.textContent = `Попыток понадобилось: ${count}`;
+    document.querySelector('body').append(stats);
+}
+
+function guessNumber() {
+    let num = randomizer(1, 10);  // внешняя переменная, которую будет использовать нижеприведённая функция tryGuess.
+    let count = 0;
+    function tryGuess() {
+        let guess = prompt("Угадай число от 1 до 100", 0);
+
+        if ( guess === null ) {
+            return alert("Игра окончена");
+        } else if
+        ( !isNumber(guess) ) {
+            alert("Введи число!");
+            return tryGuess(); // РЕКУРСИЯ
+        }
+
+        if ( num < guess ) {
+            alert("Загаданное число меньше")
+            count++;
+            return tryGuess();
+        } else if ( num > guess ) {
+            alert("Загаданное число больше")
+            count++;
+            return tryGuess();
+        } else {
+            count++;
+            scorePrint(count); // вывод статистики
+            return alert("Поздравляю, Вы угадали!!!");
+        }
+    }
+    return tryGuess(); // ЗАМЫКАНИЕ: функция возвращается вместе с внешней для неё переменной num, сохраненной в её окружении (в области действия функции guessNumber).
+}
+
+guessNumber();
