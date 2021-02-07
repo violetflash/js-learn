@@ -17,7 +17,7 @@ function scorePrint(count) {
 }
 
 function guessNumber() {
-    let num = randomizer(1, 10);  // внешняя переменная, которую будет использовать нижеприведённая функция tryGuess.
+    let num = randomizer(1, 100);  // внешняя переменная, которую будет использовать нижеприведённая функция tryGuess.
     let count = 0;
     function tryGuess() {
         let guess = prompt("Угадай число от 1 до 100", 0);
