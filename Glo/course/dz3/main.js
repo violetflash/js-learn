@@ -16,12 +16,12 @@ for (const arrElement of arr) {
   if ( arrElement[0] === "2" || arrElement[0] === "4" ) console.log(arrElement);
 }
 
-for (let i = 1; i <= 10; i++) {
-  for (let j = 1; j <= i; j++) {
+outer:
+for (let i = 2; i < 100; i++) {
+  for (let j = 2; j < i; j++) {
     if ( i % j === 0 ) {
-      break;
+      continue outer;
     }
-    console.log(i);
   }
-
+  console.log(`${i} - Делители этого числа: 1 и ${i}`);
 }

@@ -8,16 +8,15 @@
  */
 
 function game() {
-    let num = prompt("Введите число, до которого будут выведены все простые числа.", 0);
+  let num = prompt("Введите число, до которого будут выведены все простые числа.", 0);
 
-    outer:
-        for (let i = 2; i < num; i++) {
-            for (let j = 2; j < i; j++) {
-                if (i % j === 0) continue outer;
-
-            }
-            console.log(i);
-        }
+  outer:
+    for (let i = 2; i < num; i++) {
+      for (let j = 2; j < i; j++) {
+        if (i % j === 0) continue outer;
+      }
+      console.log(i);
+    }
 }
 
 game();
