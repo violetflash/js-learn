@@ -10,22 +10,40 @@
 </head>
 <body>
     <div class="weather">
-        <div class="weather__city-label label">город
+        <div class="weather__block date ">
+
+        </div>
+        <div class="weather__block">
+            текущая / прогноз
+            <select class="weather__option">
+                <option value="current">Текущая погода</option>
+                <option value="forecast">Прогноз погоды</option>
+            </select>
+        </div>
+        <div class="weather__block">город:
             <select class="weather__city">
+                <option value="4164138">Майами</option>
+                <option value="703448">Киев</option>
                 <option value="1538634">Озёрск</option>
+                <option value="7839805">Мельбурн</option>
                 <option value="1508291">Челябинск</option>
                 <option value="524894">Москва</option>
                 <option value="1070940">Антананариву</option>
+                <option value="1497337">Норильск</option>
+                <option value="2518277">Эль-Пасо</option>
             </select>
-
         </div>
-        <div class="weather__temp-label label">температура
-            <div class="weather__temp value temp"></div>
+        <div class="weather__block">температура:
+            <div class="weather__temp value"></div>
         </div>
-        <div class="weather__clouds-label label">облачность
-            <img class="weather__clouds-img" src="">
-            <div class="weather__clouds value"></div>
-
+        <div class="weather__block">влажность:
+            <div class="weather__humidity value"></div>
+        </div>
+        <div class="weather__block">скорость ветра:
+            <div class="weather__wind value"></div>
+        </div>
+        <div class="weather__block">облачность:
+            <div class="weather__clouds-img value"></div>
         </div>
     </div>
     <script src="script.js"></script>
