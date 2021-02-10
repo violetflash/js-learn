@@ -1,15 +1,20 @@
-let obj = {};
-let str;
-function isNumber(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+'use strict';
+let main = document.querySelector('.main'),
+  ulMain = main.querySelector('ul'),
+  input = main.querySelector('.adding__input'),
+  button = main.querySelector('button');
 
-do {
-  str = prompt("Введите любое слово");
-  if (str) str = str.trim();
+let massivli = [];
 
-} while ( isNumber(str) );
 
-obj += str;
+button.addEventListener('click', () => {
+  let newLi = input.value;
+  if (newLi) {
+    massivli.push(newLi);
+  }
+  input.value = "";
+  console.log(massivli);
 
-console.log(obj);
+  // e.target.reset();
+});
+
