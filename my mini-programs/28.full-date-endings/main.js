@@ -6,64 +6,103 @@ function dateToString() {
   let day = today.getDay();
   let hours = today.getHours();
   let hoursText = "";
-  console.log(typeof hours);
+  let hoursOutput;
   let minutes = today.getMinutes();
+  let minutesText = "";
+  let minutesOutput;
   let seconds = today.getSeconds();
-  console.log(typeof seconds);
+  let secondsText = "";
+  let secondsOutput;
 
-  hours = ( hours < 10 ) ? `0${hours} ${hoursText}` : `${hours} ${hoursText}`;
-  minutes = ( minutes < 10 ) ? `0${minutes}` : minutes;
-  seconds = ( seconds < 10 ) ? `0${seconds}` : seconds;
-
-
-  let tempHour = String(hours)[1];
-  switch (tempHour) {
-    case 0:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9: {
+  hours = ( hours < 10 ) ? `0${hours}` : hours;
+  switch (String(hours)[1]) {
+    case "0":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9": {
       hoursText = `часов`;
       break;
     }
-    case 1: {
+    case "1": {
       hoursText = `час`;
       break;
     }
-    case 2:
-    case 3:
-    case 4: {
+    case "2":
+    case "3":
+    case "4": {
       hoursText = `часа`;
       break;
     }
   }
 
+  if ( Math.floor(hours / 10) === 1 ) {
+    hoursText = `часов`;
+  }
 
-  // if ( String(seconds)[0] !== "1" ) {
+  hoursOutput = `${hours} ${hoursText}`;
 
-  switch (String(seconds)[1]) {
-    case 0:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9: {
-      seconds = `${seconds} секунд`;
+  minutes = ( minutes < 10 ) ? `0${minutes}` : minutes;
+  switch (String(minutes)[1]) {
+    case "0":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9": {
+      minutesText = `минут`;
       break;
     }
-    case 1: {
-      seconds = `${seconds} секунда`;
+    case "1": {
+      minutesText = `минута`;
       break;
     }
-    case 2:
-    case 3:
-    case 4: {
-      seconds = `${seconds} секунды`;
+    case "2":
+    case "3":
+    case "4": {
+      minutesText = `минуты`;
       break;
     }
   }
-  // }
+
+  if ( Math.floor(minutes / 10) === 1 ) {
+    minutesText = `минут`;
+  }
+
+  minutesOutput = `${minutes} ${minutesText}`;
+
+
+  seconds = ( seconds < 10 ) ? `0${seconds}` : seconds;
+
+  switch (String(seconds)[1]) {
+    case "0":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9": {
+      secondsText = `секунд`;
+      break;
+    }
+    case "1": {
+      secondsText = `секунда`;
+      break;
+    }
+    case "2":
+    case "3":
+    case "4": {
+      secondsText = `секунды`;
+      break;
+    }
+  }
+
+  if ( Math.floor(seconds / 10) === 1 ) {
+    secondsText = `секунд`;
+  }
+
+  secondsOutput = `${seconds} ${secondsText}`;
+
 
 
   switch (day) {
@@ -154,7 +193,7 @@ function dateToString() {
 
 
 
-  return `Cегодня ${day}, ${today.getDate()} ${month} ${today.getFullYear()} года, ${hours}:${minutes}:${seconds}`;
+  return `Cегодня ${day}, ${today.getDate()} ${month} ${today.getFullYear()} года, ${hoursOutput} ${minutesOutput} ${secondsOutput}`;
 }
 
 console.log(dateToString());
