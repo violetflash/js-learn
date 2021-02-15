@@ -1,10 +1,22 @@
 'use strict';
 let main = document.querySelector('.main'),
   ulMain = main.querySelector('ul'),
-  input = main.querySelector('.adding__input'),
   button = main.querySelector('button');
 
+let input = document.querySelector('.adding__input');
+
 let massivli = [];
+
+
+input.addEventListener('', function(e){
+  let value = e.target.value;
+
+  value = value.replace(/[^A-Za-z]/gi, "");
+
+  this.setState({
+    value
+  });
+});
 
 
 button.addEventListener('click', () => {
