@@ -91,8 +91,9 @@ document.querySelector('.b-6').onclick = f6;
 const f7 = () => {
     let input = document.querySelector('.i-7').value;
     let s7 = new Set();
+    for ( let value of input ) s7.add(value);
 
-    document.querySelector('.out-7').textContent = ( input );
+    document.querySelector('.out-7').textContent = ( input.length === s7.size && input.length > 6 ) ? 1 : 0;
 }
 
 document.querySelector('.b-7').onclick = f7;
@@ -103,15 +104,28 @@ document.querySelector('.b-7').onclick = f7;
 let s8 = new Set([1, 2, 3, 4, 5, 3, 4, 7, 9, 5, 7, 8, 9, 23, 45, 5, 2, 4, 5, 3, 24, 5, 2, 4, 56, 4, 3, 2, 335, 2, 23, 41, 3, 4, 1, 1, 4, 2, 2, 4, 5, 24, 5, 3, 22, 56]);
 let ar8 = [];
 
-const f8 = () => { }
+const f8 = () => {
+    for ( let value of s8 ) {
+        if ( value > 5 ) ar8.push(value);
+    }
+    console.log(ar8);
+}
 
 document.querySelector('.b-8').onclick = f8;
 
 // Task 9
-//  При нажатии b-9 выполняете функцию f9. Функция должна принимать набор our_set в качестве параметра, преобразовывать его в строку, причем после каждого символа строки должен быть пробел. Функция должна возвращать результирующую строку. 
+//  При нажатии b-9 выполняете функцию f9. Функция должна принимать набор our_set '
+//  в качестве параметра, преобразовывать его в строку, причем после каждого символа строки должен быть пробел.
+//  Функция должна возвращать результирующую строку.
 // В нашем примере результат должен быть 9 8 7 6 5 
 
-const f9 = our_set => { }
+const f9 = our_set => {
+    let str = "";
+    for ( let value of our_set ) {
+        str += `${value} `;
+    }
+    return str;
+}
 
 document.querySelector('.b-9').onclick = () => {
     let s9 = new Set([9, 8, 7, 6, 5]);
@@ -119,9 +133,12 @@ document.querySelector('.b-9').onclick = () => {
 }
 
 // Task 10
-// При нажатии b-10 выполняете функцию f10. Функция должна принимать набор set в качестве параметра и выводить его в указанный элемент. Элемент указывается как второй параметр функции f10. Вывод значений - через пробел.
+// При нажатии b-10 выполняете функцию f10. Функция должна принимать набор set в качестве параметра и выводить его в указанный элемент.
+// Элемент указывается как второй параметр функции f10. Вывод значений - через пробел.
 
-const f10 = (out_set, elem) => { }
+const f10 = (out_set, elem) => {
+    for ( let value of out_set ) document.querySelector(elem).textContent += `${value} `;
+}
 
 document.querySelector('.b-10').onclick = () => {
     let a10 = new Set(['4', '5', '6']);
@@ -143,12 +160,17 @@ const f11 = () => {
 document.querySelector('.b-11').onclick = f11;
 
 // Task 12
-//   При нажатии b-12 выполняете функцию f12. Функция должна преобразовать строку str12 в массив, так, что каждая буква - отдельный элемент массива. Потом создать набор на основе массива и возвратить его.
+//   При нажатии b-12 выполняете функцию f12. Функция должна преобразовать строку str12 в массив, так, что каждая буква - отдельный элемент массива.
+//   Потом создать набор на основе массива и возвратить его.
 
 let str12 = 'The name conjures up visions of plum pudding and Christmas punch quaint coaching inns and cozy firesides but also of orphaned and starving children';
 
 const f12 = () => {
-
+    arr12 = [];
+    for ( let strChar of str12 ) {
+        arr12.push(strChar);
+    }
+    return new Set(arr12);
 }
 
 document.querySelector('.b-12').onclick = () => {
@@ -156,7 +178,9 @@ document.querySelector('.b-12').onclick = () => {
 }
 
 // Task 13
-//  При нажатии b-13 выполняете функцию f13. Функция должна преобразовать строку str13 в массив, причем каждая буква - отдельный элемент массива. Потом создать набор на основе массива. Затем, перебирая набор поэлементам, найти сколько раз каждый символ встречается в исходном массиве. Результат - в виде объекта типа { символ : количество, символ : количество } вывести в консоль и возвратить.
+//  При нажатии b-13 выполняете функцию f13. Функция должна преобразовать строку str13 в массив, причем каждая буква - отдельный элемент массива.
+//  Потом создать набор на основе массива. Затем, перебирая набор поэлементам, найти сколько раз каждый символ встречается в исходном массиве.
+//  Результат - в виде объекта типа { символ : количество, символ : количество } вывести в консоль и возвратить.
 // пример результата для строки 'Hello ho'
 // { "H" : 1, 'e' : 1, 'l' : 2, "o" : 2, " ": 1}
 
@@ -164,8 +188,21 @@ let str13 = 'The name conjures up visions of plum pudding and Christmas punch qu
 
 
 const f13 = () => {
+    arr13 = [];
+    let outObj = {};
+    for ( let strChar of str13 ) {
+        arr13.push(strChar);
+    }
+    let set13 = new Set(arr13);
 
-    // return
+    for (const setValue of set13) {
+        let count  = 0;
+        for ( const arrValue of arr13) {
+            if ( setValue === arrValue ) count++;
+        }
+        outObj[setValue] = count;
+    }
+    return outObj;
 }
 
 document.querySelector('.b-13').onclick = () => {
