@@ -28,8 +28,10 @@ document.querySelector('.b-2').addEventListener('click', f2);
 //При нажатии .b-3 выполняете функцию f3. Функция получает div.out-3 со страницы с помощью getElementsByClassName и в каждый записывает число 3, перезаписывая содержимое div.
 
 function f3() {
-    for ( let i = 0; i < document.getElementsByClassName(".out-3").length; i++) {
-        document.getElementsByClassName(".out-3")[i].textContent = 3;
+    let out = document.getElementsByClassName("out-3");
+    console.log(out.length);
+    for ( let i = 0; i < out.length; i++) {
+        out[i].textContent = 3;
     }
 }
 
@@ -40,7 +42,10 @@ document.querySelector('.b-3').addEventListener('click', f3);
 //При нажатии .b-4 выполняете функцию f4. Функция получает div.out-4 со страницы с помощью querySelectorAll и в каждый дописывает число 4.
 
 function f4() {
-
+    let out = document.querySelectorAll(".out-4");
+    for ( let i = 0; i < out.length; i++) {
+        out[i].textContent = 4;
+    }
 }
 
 document.querySelector('.b-4').addEventListener('click', f4);
@@ -51,7 +56,11 @@ document.querySelector('.b-4').addEventListener('click', f4);
 let a5 = [3,4,5,2,1,7,8,2,4,6,8,11,23,17];
 
 function f5() {
-
+    let a5new = [];
+    for ( let a5Value of a5 ) {
+        if ( a5Value > 7 ) a5new.push(a5Value);
+    }
+    return a5new;
 }
 
 document.querySelector('.b-5').addEventListener('click', ()=> {
@@ -64,7 +73,16 @@ document.querySelector('.b-5').addEventListener('click', ()=> {
 let a6 = [[1,2], [3,4], [5,6]];
 
 function f6() {
+    let counter = 1;
+    let a6Copy = [];
+    for ( let a6Value of a6 ) {
 
+        for ( let subValue of a6Value ) {
+            counter++;
+            a6Copy[counter] = subValue;
+        }
+    }
+    console.log(a6Copy);
 }
 
 document.querySelector('.b-6').addEventListener('click', f6);
