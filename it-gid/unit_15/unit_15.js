@@ -137,7 +137,9 @@ document.querySelector('.b-9').onclick = () => {
 // Элемент указывается как второй параметр функции f10. Вывод значений - через пробел.
 
 const f10 = (out_set, elem) => {
-    for ( let value of out_set ) document.querySelector(elem).textContent += `${value} `;
+    let str = "";
+    for ( let value of out_set ) str += `${value} `;
+    document.querySelector(elem).textContent = str;
 }
 
 document.querySelector('.b-10').onclick = () => {
