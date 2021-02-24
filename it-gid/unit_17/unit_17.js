@@ -141,7 +141,7 @@ let b8 = [3, 14, 15, 92, "6", "5", "hello", 32];
 
 function t8() {
   b8.filter( (item, index) => {
-    if ( item % 2 === 0 ) b8_res.push(index);
+    if ( typeof item === 'number' && item % 2 === 0 ) b8_res.push(index);
   } );
   return b8_res;
 }

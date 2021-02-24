@@ -1,42 +1,23 @@
-/* Напишите функцию на JS. Цель: Убрать все объекты с типом additional, а для basic очки уменьшить в двое.
-
-Cоздать новый массив, оставляя исходные данные неизменными */
-
-const myLesson = [
-  {lesson: 1, type: 'basic', points: 2},
-  {lesson: 2, type: 'additional', points: 4},
-  {lesson: 3, type: 'basic', points: 6},
-  {lesson: 4, type: 'additional', points: 3},
-  {lesson: 5, type: 'basic', points: 4},
-  {lesson: 6, type: 'basic', points: 2},
-  {lesson: 7, type: 'additional', points: 2},
-  {lesson: 8, type: 'basic', points: 6},
-  {lesson: 9, type: 'basic', points: 4},
-  {lesson: 10, type: 'basic', points: 6},
-  {lesson: 11, type: 'additional', points: 5},
-  {lesson: 12, type: 'basic', points: 2},
-  {lesson: 13, type: 'additional', points: 2},
-  {lesson: 14, type: 'basic', points: 4},
-  {lesson: 15, type: 'additional', points: 1},
-  {lesson: 16, type: 'additional', points: 7},
-];
-
-function cutter(obj) {
-  let outputObj = [];
-
-  for (const item of obj) {
-    if ( item.type !== 'additional' ) {
-      outputObj.push(Object.assign({}, item));
-    }
-  }
-
-  for (const item of outputObj) {
-    if ( item.type === 'basic' ) item.points /= 2;
-  }
-
-  return outputObj;
-}
-
-console.log(myLesson);
-console.log("==============")
-console.log(cutter(myLesson));
+/*
+1) Сделать класс DomElement, который
+содержит свойства
+- selector,
+  - height,
+  - width,
+  - bg,
+  - fontSize
+содержит метод, который создает элемент на странице в зависимости от условия:
+- если строка selector начинается с точки, создаем div с классом
+- если строка selector  начинается с решетки # то создаем параграф с id
+пример:
+  если передана строка '.block', то функция конструктор создает элемент с class="block"
+если передана строка '#best', то функция конструктор создает элемент с id =best"
+с помощью cssText задавать стили:
+  - высотой - height,
+  - шириной - width,
+  - background - bg
+  - размер текста fontSize
+внутрь созданного блока записывать любой текст. Метод записи может быть любым.
+2) Создать новый объект на основе класса DomElement
+3) Вызвать его метод чтобы получить элемент на странице
+ */
