@@ -44,7 +44,6 @@ document.querySelector('.div-3').addEventListener('click', t3);
 
 function t4() {
   document.querySelector('.out-4').textContent = document.querySelector('.div-4').textContent;
-  // alert(1);
 }
 
 // ваше событие здесь!!!
@@ -106,7 +105,7 @@ document.querySelector('.ch-8').addEventListener('change', t8);
 function t9(e) {
   e.preventDefault();
   let block = document.querySelector('.div-9');
-  block.getElementsByTagName('img').src = 'img/2.png';
+  block.getElementsByTagName('img')[0].src = 'img/2.png';
 }
 
 // ваше событие здесь!!!
@@ -116,28 +115,38 @@ document.querySelector('.div-9').addEventListener('contextmenu', t9);
 /*  Дан блок .div-10. Внутри блока - изображение 1.png. При наведении мыши (mouseenter)  - меняйте изображение на 2.png. */
 
 function t10() {
-
+  let block = document.querySelector('.div-10');
+  block.getElementsByTagName('img')[0].src = 'img/2.png';
 }
 
 // ваше событие здесь!!!
+document.querySelector('.div-10').addEventListener('mouseenter', t10);
 
 // Task 11 ============================================
 /*  Дан блок .div-11. Внутри блока - изображение 1.png. При наведении мыши (mouseenter)  - меняйте изображение на 2.png. При уведении мыши - mouseleave - возвращайте исходное изображение. */
 
 function t11() {
-
+  let block = document.querySelector('.div-11');
+  block.addEventListener('mouseenter', () => {
+    block.getElementsByTagName('img')[0].src = 'img/2.png';
+  })
+  block.addEventListener('mouseleave', () => {
+    block.getElementsByTagName('img')[0].src = 'img/1.png';
+  })
 }
 
 // ваше событие здесь!!!
+document.querySelector('.div-11').addEventListener('mousemove', t11);
 
 // Task 12 ============================================
 /*  Дан блок .div-12. Добавьте на него событие mousedown - при нажатии кнопки мыши - добавляйте ему класс active. */
 
-// () => {
-
-// }
+function t12() {
+  document.querySelector('.div-12').classList.toggle('active');
+}
 
 // ваше событие здесь!!!
+document.querySelector('.div-12').addEventListener('mousedown', t12);
 
 
 // Task 13 ============================================
