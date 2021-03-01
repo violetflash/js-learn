@@ -79,31 +79,38 @@ document.querySelector('.div-6').addEventListener('dblclick', t6);
 // Task 7 ============================================
 /*  Дан блок .div-7. При клике правой кнопкой мыши на блоке добавляйте ему класс .active. При повторном клике - удаляйте. */
 
-function t7() {
-
+function t7(e) {
+  e.preventDefault();
+  document.querySelector('.div-7').classList.toggle('active');
 }
 
 // ваше событие здесь!!!
+document.querySelector('.div-7').addEventListener('contextmenu', t7);
 
 // Task 8 ============================================
 /*  Дано checkbox .ch-8. Повесьте на него событие onchange при котором на документе отключается клик правой кнопкой мыши если checkbox выбран и отключает если не выбран. */
 
 function t8() {
+  document.addEventListener('contextmenu', (e) => {
+    if ( document.querySelector('.ch-8').checked ) e.preventDefault();
+  })
 
 }
 
 // ваше событие здесь!!!
-
+document.querySelector('.ch-8').addEventListener('change', t8);
 
 // Task 9 ============================================
 /*  Дан блок .div-9. Внутри блока - изображение 1.png. При клике правой кнопкой мыши  - меняйте изображение на 2.png. Надеюсь вы догадаетесь изменить только src изображения? */
 
-function t9() {
-
+function t9(e) {
+  e.preventDefault();
+  let block = document.querySelector('.div-9');
+  block.getElementsByTagName('img').src = 'img/2.png';
 }
 
 // ваше событие здесь!!!
-
+document.querySelector('.div-9').addEventListener('contextmenu', t9);
 
 // Task 10 ============================================
 /*  Дан блок .div-10. Внутри блока - изображение 1.png. При наведении мыши (mouseenter)  - меняйте изображение на 2.png. */
