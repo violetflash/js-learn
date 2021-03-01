@@ -2,19 +2,24 @@
 // Task 1 ============================================
 /* Дан input .i-1. Напишите функцию t1, которая выводит в .out-1 символ и возвращает его. Во всех последующих задачах - работаем с латиницей и цифрами.*/
 
-function t1() {
+function t1(e) {
+    document.querySelector('.out-1').textContent = e.key;
+    return e.key;
 }
 
 // ваше событие здесь!!!
+document.querySelector('.i-1').addEventListener('keydown', t1);
 
 // Task 2 ============================================
 /*  Дан input .i-2. Напишите функцию t2, которая выводит в .out-2 код символа и возвращает его. */
 
-function t2() {
-
+function t2(e) {
+    document.querySelector('.out-2').textContent = e.which;
+    return e.which;
 }
 
 // ваше событие здесь!!!
+document.querySelector('.i-2').addEventListener('keydown', t2);
 
 
 // Task 3 ============================================
