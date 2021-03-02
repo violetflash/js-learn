@@ -1,3 +1,11 @@
+html {
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+}
+
 .container  {
     width: 100%;
 }
@@ -21,4 +29,34 @@ section {
 
 .hide {
     display: none;
+}
+
+.digits {
+    display: flex;
+    align-items: center;
+}
+
+
+
+.key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    line-height: 1;
+    white-space: normal;
+    text-transform: none;
+    /*border-right: none;*/
+}
+
+.key:last-child {
+    /*border-right: 1px solid #ccc;*/
+}
+
+.space {
+    width: 330px;
 }
