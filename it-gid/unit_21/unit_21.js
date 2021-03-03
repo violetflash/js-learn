@@ -142,11 +142,13 @@ const mainImage = document.querySelector('.img-12-max');
 
 let count = 0; // переменная, которая указывает на номер активного изображения в images
 
-const next = document.querySelector('.next');
-next.onclick = nextFunction;
+const next = document.querySelectorAll('.next');
+next[0].addEventListener('click', nextFunction);
+next[0].addEventListener('touch', nextFunction);
 
-const prev = document.querySelector('.prev');
-prev.onclick = prevFunction;
+const prev = document.querySelectorAll('.prev');
+prev[0].addEventListener('click', prevFunction);
+prev[0].addEventListener('touch', prevFunction);
 
 function nextFunction() {
   for (let i = 0; i < images.length; i++) {
@@ -172,6 +174,15 @@ function prevFunction() {
   mainImage.src = images[count].src;
 }
 
+function resetFunction() {
+  count = 0;
+  for (let i = 0; i < images.length; i++) {
+    images[i].classList.remove('active-img');
+  }
+  images[0].classList.add('active-img');
+  mainImage.src = images[0].src;
+
+}
 
 // ваше событие здесь!!!
 const reset = document.querySelector('.reset');

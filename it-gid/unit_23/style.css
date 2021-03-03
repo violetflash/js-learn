@@ -35,8 +35,3 @@ section {
 .active-img {
     border: 3px solid black;
 }
-
-.reset {
-    background-color: #dd5f5f;
-    border: none;
-}
