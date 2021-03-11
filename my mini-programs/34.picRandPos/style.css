@@ -1,0 +1,15 @@
+html,
+body {
+  width: 80%;
+  height: 80%;
+  margin: 0;
+}
+.pic {
+  transition: all 0.3s ease 0s;
+  border: 10px solid transparent;
+
+}
+
+.pic:hover {
+  border: 10px solid gold;
+}
