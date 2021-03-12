@@ -43,3 +43,19 @@ console.log(isChild(17));
 const isGoodTemp = makeBetweenFunc(0, 23);
 
 console.log(isGoodTemp(17));
+
+
+
+//======================================================
+//Detects if two elements of the DOM are overlapping
+function isTouching(a, b) {
+  const aRect = a.getBoundingClientRect();
+  const bRect = b.getBoundingClientRect();
+
+  return !(
+    aRect.top + aRect.height < bRect.top ||
+    aRect.top > bRect.top + bRect.height ||
+    aRect.left + aRect.width < bRect.left ||
+    aRect.left > bRect.left + bRect.width
+  );
+}

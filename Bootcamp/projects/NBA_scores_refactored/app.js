@@ -89,7 +89,7 @@ const warriorsGames = [{
 const makeChart = (games, targetTeam) => {
   const ulParent = document.createElement('ul');
   ulParent.style.listStyle = 'none';
-  ulParent.style.margin = '0 0 20px';
+  ulParent.style.margin = '0 0 20px 20px';
   ulParent.style.padding = '0';
 
   for ( let game of games ) {
@@ -99,7 +99,7 @@ const makeChart = (games, targetTeam) => {
     const li = document.createElement('li');
     li.innerHTML = getScoreLine(game);
     li.classList.add(isWinner(game, targetTeam) ? `win` : `loss`);
-    li.style.padding = '5px 0';
+    li.style.padding = '5px 0 5px 10px';
     li.style.width = '600px';
     li.style.marginBottom = '2px';
     ulParent.appendChild(li);

@@ -1,0 +1,12 @@
+.box {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+}
+
+#boxes {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+}
