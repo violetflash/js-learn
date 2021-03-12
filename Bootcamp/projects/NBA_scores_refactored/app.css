@@ -1,0 +1,11 @@
+.win {
+  background-color: darkseagreen;
+}
+
+.loss {
+  background-color: palevioletred;
+}
+
+h2 {
+  margin: 0 0 5px;
+}
