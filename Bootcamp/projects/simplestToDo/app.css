@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.main {
+
+
+}
+
+.done {
+  text-decoration: line-through;
+  color: #ccc;
+}

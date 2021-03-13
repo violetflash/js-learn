@@ -1,0 +1,99 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  block-size: inherit;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #282c34;
+}
+
+h1 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 35px;
+}
+
+.main {
+  margin: 100px 0 0;
+  padding: 20px 50px 50px;
+  background-color: #f1f1e4;
+  border-radius: 15px 15px 0 0;
+}
+
+.input {
+  margin: 0 15px 0 0;
+  padding: 10px;
+  border: none;
+  background-color: #f1f1e4;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  outline: transparent;
+}
+
+.btn-add {
+  padding: 10px;
+  background-color: #81e384;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: transparent;
+}
+
+.row {
+  margin: 0 0 10px;
+}
+
+.translation {
+  margin: 0 15px;
+  background-color: #e5e2d7;
+  padding: 0 10px;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.remove-btn {
+  border: none;
+  width: 14px;
+  height: 14px;
+  background-image: url(img/recycle.png);
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
+}
+
+ul {
+  list-style: unset;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+li::before {
+  content: attr(data-counter);
+  margin-right: 10px;
+}
+
+.word::after {
+  content: '-';
+  margin-left: 15px;
+}

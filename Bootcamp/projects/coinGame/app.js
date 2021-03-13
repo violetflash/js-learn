@@ -48,8 +48,8 @@ const moveVertical = (element, amount) => {
 }
 
 const moveCoin = () => {
-  const x = Math.floor(Math.random() * window.innerWidth);
-  const y = Math.floor(Math.random() * window.innerHeight);
+  const x = Math.floor(Math.random() * window.innerWidth - 100);
+  const y = Math.floor(Math.random() * window.innerHeight -100);
   coin.style.left = `${x}px`;
   coin.style.top = `${y}px`;
 }
