@@ -66,14 +66,14 @@ const toDoObject = {
     place.before(sortLabel);
     const sortButtons = document.querySelectorAll('.sort-btn');
     const shuffleButtons = document.querySelectorAll('.shuffle-btn');
-    sortButtons.forEach(function() {
-      this.addEventListener('click', function(e) {
+    sortButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
         sortWords(array);
         render();
       });
     })
-    shuffleButtons.forEach(function() {
-      this.addEventListener('click', function(e) {
+    shuffleButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
         shuffle(array);
         render();
       });
