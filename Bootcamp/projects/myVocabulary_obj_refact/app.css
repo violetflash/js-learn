@@ -138,10 +138,27 @@ li::before {
   margin: 35px 0 20px;
 }
 
-.sort {
-  padding: 5px;
-  margin-left: 10px;
+.sort-btn,
+.shuffle-btn {
+  margin-left: 15px;
   border: none;
-  /*border-bottom: 1px solid #ccc;*/
+  width: 15px;
+  height: 15px;
+  background-image: url('img/sort.png');
+  background-position: center;
+  background-size: cover;
+  cursor: pointer;
   outline: transparent;
 }
+
+.shuffle-btn {
+  background-image: url('img/shuffle.png');
+}
+
+.sort-label,
+.learned-sort-label {
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+}
+
