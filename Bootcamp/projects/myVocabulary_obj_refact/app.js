@@ -1,4 +1,4 @@
-//todo localstorage, database, google translate API, refactoring, render function wrap
+//todo word editing functionality, sorting bug fix
 
 const toDoObject = {
   word: document.querySelector('#word'),
@@ -7,10 +7,8 @@ const toDoObject = {
   title: document.querySelector('.title'),
   titleCounter: document.querySelector('.title-counter'),
   learnedTitle: document.querySelector('.learned-title'),
-  vocab: {
-    toLearn: [],
-    learnedWords: [],
-  },
+
+  vocab: localStorage.getItem('vocab') ? JSON.parse(localStorage.getItem('vocab')) : {toLearn: [], learnedWords: []},
   ul: document.querySelector('.to-learn'),
   ulLearned: document.querySelector('.learned'),
 
@@ -21,6 +19,7 @@ const toDoObject = {
         'word': word.value.toLowerCase(),
         'translation': translation.value.toLowerCase(),
       })
+      localStorage.setItem('vocab', JSON.stringify(vocab));
       render();
       word.value = '';
       translation.value = '';
@@ -69,12 +68,14 @@ const toDoObject = {
     sortButtons.forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         sortWords(array);
+        localStorage.setItem('vocab', JSON.stringify(vocab));
         render();
       });
     })
     shuffleButtons.forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         shuffle(array);
+        localStorage.setItem('vocab', JSON.stringify(vocab));
         render();
       });
     })
@@ -146,9 +147,25 @@ const toDoObject = {
 
         const removeBtn = document.createElement('button');
         removeBtn.classList.add('remove-btn');
+        removeBtn.addEventListener('mouseenter', function(e) {
+          console.log(this);
+          this.style.width = '40px';
+          this.style.height = '20px';
+          this.style.textContent = "DELETE";
+          // const word = 'delete';
+          // for ( const char of word ) {
+          //   this.style.innerHTML += char;
+          // }
+          setInterval(function() {
+
+          }, 1000);
+        });
+        // removeBtn.innerHTML = 'Delete';
+        // removeBtn.innerHTML = '<span class="del-notify">Delete</span>';
         removeBtn.addEventListener('click', function(e) {
           //удаляем из массива объект
           array.splice(index, 1);
+          localStorage.setItem('vocab', JSON.stringify(vocab));
           //перерисовка
           render();
           refreshTitle();
@@ -166,6 +183,7 @@ const toDoObject = {
           }
           //удаляем из массива объект
           array.splice(index, 1);
+          localStorage.setItem('vocab', JSON.stringify(vocab));
           console.log(array);
           //перерисовка
           render();
@@ -190,10 +208,89 @@ const toDoObject = {
 }
 
 
-const {addBtn, addNewWord, translation, word} = toDoObject;
+const {addBtn, addNewWord, translation, word, render} = toDoObject;
 addBtn.addEventListener('click', addNewWord);
 translation.addEventListener('keypress', function(e) {
   if ( e.key === 'Enter' ) addNewWord();
   word.focus();
 });
+
+window.addEventListener('load', function(e) {
+  render();
+})
+
+
+
+
+//======================MODAL====================
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+
+  /* Записываем в переменные массив элементов-кнопок и подложку.
+     Подложке зададим id, чтобы не влиять на другие элементы с классом overlay*/
+  var modalButtons = document.querySelectorAll('.js-open-modal'),
+    overlay      = document.querySelector('.js-overlay-modal'),
+    closeButtons = document.querySelectorAll('.js-modal-close');
+
+
+  /* Перебираем массив кнопок */
+  modalButtons.forEach(function(item){
+
+    /* Назначаем каждой кнопке обработчик клика */
+    item.addEventListener('click', function(e) {
+
+      /* Предотвращаем стандартное действие элемента. Так как кнопку разные
+         люди могут сделать по-разному. Кто-то сделает ссылку, кто-то кнопку.
+         Нужно подстраховаться. */
+      e.preventDefault();
+
+      /* При каждом клике на кнопку мы будем забирать содержимое атрибута data-modal
+         и будем искать модальное окно с таким же атрибутом. */
+      var modalId = this.getAttribute('data-modal'),
+        modalElem = document.querySelector('.modal[data-modal="' + modalId + '"]');
+
+
+      /* После того как нашли нужное модальное окно, добавим классы
+         подложке и окну чтобы показать их. */
+      modalElem.classList.add('active');
+      overlay.classList.add('active');
+    }); // end click
+
+  }); // end foreach
+
+
+  closeButtons.forEach(function(item){
+
+    item.addEventListener('click', function(e) {
+      var parentModal = this.closest('.modal');
+
+      parentModal.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+  }); // end foreach
+
+
+  document.body.addEventListener('keyup', function (e) {
+    var key = e.keyCode;
+
+    if (key == 27) {
+
+      document.querySelector('.modal.active').classList.remove('active');
+      document.querySelector('.overlay').classList.remove('active');
+    };
+  }, false);
+
+
+  overlay.addEventListener('click', function() {
+    document.querySelector('.modal.active').classList.remove('active');
+    this.classList.remove('active');
+  });
+
+
+
+
+}); // end ready
 
