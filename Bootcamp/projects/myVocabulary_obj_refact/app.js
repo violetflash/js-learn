@@ -1,4 +1,4 @@
-//todo word editing functionality, sorting bug fix
+//todo: word editing functionality, sorting bug fix, confirm deleting
 
 const toDoObject = {
   word: document.querySelector('#word'),
@@ -33,7 +33,7 @@ const toDoObject = {
     const {vocab, title, learnedTitle} = toDoObject;
 
     //words title
-    title.textContent = vocab.toLearn.length > 0 ? 'Words to learn' : 'No words added';
+    title.textContent = vocab.toLearn.length > 0 ? 'Words to learn:' : 'No words added';
     const titleCounter = document.createElement('span');
     titleCounter.className = 'title-counter';
     if ( vocab.toLearn.length > 0 && !document.querySelector('.title-counter') ) {
@@ -44,7 +44,7 @@ const toDoObject = {
     }
 
     //learned words title
-    learnedTitle.textContent = vocab.learnedWords.length > 0 ? 'Words learned' : 'No words learned';
+    learnedTitle.textContent = vocab.learnedWords.length > 0 ? 'Words learned:' : 'No words learned';
     const learnedTitleCounter = document.createElement('span');
     learnedTitleCounter.className = 'learned-title-counter';
     if ( vocab.learnedWords.length > 0 && !document.querySelector('.learned-title-counter') ) {
@@ -133,35 +133,28 @@ const toDoObject = {
       const array = vocab[key];
       array.forEach(function(item, index) {
         const li = document.createElement('li');
+        //attribute for the pseudo-el counter
         li.setAttribute('data-counter', `${index+1})`);
         refreshTitle();
         li.classList.add('row');
 
+        //creates word div
         const wordBlock = document.createElement('span');
         wordBlock.innerHTML = `<b>${item.word}</b>`;
         wordBlock.classList.add('word');
 
+        //creates translation div
         const translationBlock = document.createElement('span');
         translationBlock.classList.add('translation');
         translationBlock.innerText = item.translation;
 
+        //creates controls block
+        const controls = document.createElement('div');
+        controls.className = 'controls';
+
+        //creates Delete button
         const removeBtn = document.createElement('button');
         removeBtn.classList.add('remove-btn');
-        removeBtn.addEventListener('mouseenter', function(e) {
-          console.log(this);
-          this.style.width = '40px';
-          this.style.height = '20px';
-          this.style.textContent = "DELETE";
-          // const word = 'delete';
-          // for ( const char of word ) {
-          //   this.style.innerHTML += char;
-          // }
-          setInterval(function() {
-
-          }, 1000);
-        });
-        // removeBtn.innerHTML = 'Delete';
-        // removeBtn.innerHTML = '<span class="del-notify">Delete</span>';
         removeBtn.addEventListener('click', function(e) {
           //удаляем из массива объект
           array.splice(index, 1);
@@ -172,6 +165,7 @@ const toDoObject = {
           removeThings(array);
         });
 
+        //creates Move  button
         const moveBtn = document.createElement('button');
         moveBtn.classList.add('move-btn');
         moveBtn.innerHTML = array === vocab.toLearn ? 'move to <b>Learned</b>' : 'move to <b>Vocab</b>';
@@ -191,16 +185,37 @@ const toDoObject = {
           removeThings(array);
         });
 
+        //creates Edit button
+        const editBtn = document.createElement('a');
+        editBtn.className = 'edit-btn';
+        editBtn.innerHTML = '<span class="tooltip">Edit</span>';
+        editBtn.addEventListener('click', function(e) {
+          console.log('this opens the modal with functionality to edit this word');
+        });
 
+        //inserting elements
+        controls.appendChild(removeBtn);
+        controls.appendChild(moveBtn);
+        controls.appendChild(editBtn);
         li.appendChild(wordBlock);
         li.appendChild(translationBlock);
-        li.appendChild(removeBtn);
-        li.appendChild(moveBtn);
+        li.appendChild(controls);
+
         if ( array === vocab.toLearn ) {
           ul.appendChild(li);
         } else if ( array === vocab.learnedWords ) {
           ulLearned.appendChild(li);
         }
+
+
+        // shows-hides Buttons
+        li.addEventListener('mouseenter', function() {
+          li.querySelector('.controls').classList.add('visible');
+        })
+        li.addEventListener('mouseleave', function() {
+          li.querySelector('.controls').classList.remove('visible');
+        })
+
       })
     }
 
@@ -219,78 +234,4 @@ window.addEventListener('load', function(e) {
   render();
 })
 
-
-
-
-//======================MODAL====================
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-
-  /* Записываем в переменные массив элементов-кнопок и подложку.
-     Подложке зададим id, чтобы не влиять на другие элементы с классом overlay*/
-  var modalButtons = document.querySelectorAll('.js-open-modal'),
-    overlay      = document.querySelector('.js-overlay-modal'),
-    closeButtons = document.querySelectorAll('.js-modal-close');
-
-
-  /* Перебираем массив кнопок */
-  modalButtons.forEach(function(item){
-
-    /* Назначаем каждой кнопке обработчик клика */
-    item.addEventListener('click', function(e) {
-
-      /* Предотвращаем стандартное действие элемента. Так как кнопку разные
-         люди могут сделать по-разному. Кто-то сделает ссылку, кто-то кнопку.
-         Нужно подстраховаться. */
-      e.preventDefault();
-
-      /* При каждом клике на кнопку мы будем забирать содержимое атрибута data-modal
-         и будем искать модальное окно с таким же атрибутом. */
-      var modalId = this.getAttribute('data-modal'),
-        modalElem = document.querySelector('.modal[data-modal="' + modalId + '"]');
-
-
-      /* После того как нашли нужное модальное окно, добавим классы
-         подложке и окну чтобы показать их. */
-      modalElem.classList.add('active');
-      overlay.classList.add('active');
-    }); // end click
-
-  }); // end foreach
-
-
-  closeButtons.forEach(function(item){
-
-    item.addEventListener('click', function(e) {
-      var parentModal = this.closest('.modal');
-
-      parentModal.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-
-  }); // end foreach
-
-
-  document.body.addEventListener('keyup', function (e) {
-    var key = e.keyCode;
-
-    if (key == 27) {
-
-      document.querySelector('.modal.active').classList.remove('active');
-      document.querySelector('.overlay').classList.remove('active');
-    };
-  }, false);
-
-
-  overlay.addEventListener('click', function() {
-    document.querySelector('.modal.active').classList.remove('active');
-    this.classList.remove('active');
-  });
-
-
-
-
-}); // end ready
 
