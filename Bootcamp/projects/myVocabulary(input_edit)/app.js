@@ -95,13 +95,13 @@ const toDoObject = {
     array.sort(compare);
   },
 
-  //Fisher Yates Shuffle
+  //  Fisher Yates Shuffle
   shuffle(array) {
     // const {vocab} = toDoObject;
     for ( let i = array.length - 1; i > 0; i--) {
-      //pick random index before current element
+      //  pick random index before current element
       let j = Math.floor(Math.random() * (i + 1));
-      //swap in place (shorthand way of swapping elements using destructuring
+      //  swap in place (shorthand way of swapping elements using destructuring
       [array[i], array[j]] = [array[j], array[i]];
     }
   },
@@ -115,10 +115,10 @@ const toDoObject = {
       if ( array.length === 1 ) document.querySelector('.learned-sort-label').remove();
     }
   },
-  //отрисовка массива
+  //  отрисовка массива
   render: function render() {
     const {vocab, refreshTitle, ul, addSorting, ulLearned, removeThings} = toDoObject;
-    //затираем список для отрисовки нового
+    //  затираем список для отрисовки нового
     ul.innerHTML = '';
     ulLearned.innerHTML = '';
     if ( vocab.toLearn.length > 1 && !document.querySelector('.sort-label') ) {
@@ -128,7 +128,7 @@ const toDoObject = {
       addSorting(vocab.learnedWords, ulLearned);
     }
 
-    //для каждого итема массива рисуем li
+    //  для каждого итема массива рисуем li
     for (const key in vocab) {
       const array = vocab[key];
       array.forEach(function(item, index) {
@@ -143,16 +143,16 @@ const toDoObject = {
         wordBlock.innerHTML = `<b>${item.word}</b>`;
         wordBlock.classList.add('word');
 
-        //creates translation div
+        //  creates translation div
         const translationBlock = document.createElement('span');
         translationBlock.classList.add('translation');
         translationBlock.innerText = item.translation;
 
-        //creates controls block
+        //  creates controls block
         const controls = document.createElement('div');
         controls.className = 'controls';
 
-        //creates Delete button
+        //  creates Delete button
         const removeBtn = document.createElement('button');
         removeBtn.classList.add('remove-btn');
         removeBtn.addEventListener('click', function(e) {
@@ -165,7 +165,7 @@ const toDoObject = {
           removeThings(array);
         });
 
-        //creates Move  button
+        //  Creates Move  button
         const moveBtn = document.createElement('button');
         moveBtn.classList.add('move-btn');
         moveBtn.innerHTML = array === vocab.toLearn ? 'move to <b>Learned</b>' : 'move to <b>Vocab</b>';
@@ -175,7 +175,7 @@ const toDoObject = {
           } else if ( array === vocab.learnedWords ) {
             vocab.toLearn.push(item);
           }
-          //удаляем из массива объект
+          //  удаляем из массива объект
           array.splice(index, 1);
           localStorage.setItem('vocab', JSON.stringify(vocab));
           console.log(array);
@@ -185,15 +185,17 @@ const toDoObject = {
           removeThings(array);
         });
 
-        //creates Edit button
+        //  creates Edit button
         const editBtn = document.createElement('a');
         editBtn.className = 'edit-btn';
         editBtn.innerHTML = '<span class="tooltip">Edit</span>';
+        //  Opens modal window with edit functionality
         editBtn.addEventListener('click', function(e) {
           console.log('this opens the modal with functionality to edit this word');
+
         });
 
-        //inserting elements
+        //  inserting elements
         controls.appendChild(removeBtn);
         controls.appendChild(moveBtn);
         controls.appendChild(editBtn);
@@ -233,5 +235,10 @@ translation.addEventListener('keypress', function(e) {
 window.addEventListener('load', function(e) {
   render();
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+  const overlay = document.querySelector('#overlay-modal');
+  const closeButton = document.querySelector('.js-modal-close');
+});
 
 

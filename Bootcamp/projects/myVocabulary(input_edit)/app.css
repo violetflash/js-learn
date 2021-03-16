@@ -95,20 +95,23 @@ input {
   border-radius: 2px;
   cursor: pointer;
   font-size: 10px;
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   background-image: url(img/recycle.png);
   background-position: center;
-  background-size: cover;
+  background-size: 16px;
   background-repeat: no-repeat;
 }
 
 .edit-btn {
   /*width: 20px;*/
-  padding-left: 30px;
+  /*padding-left: 30px;*/
+  padding: 5px;
   margin-left: 5px;
   background-image: url(img/edit.png);
-  background-size: contain;
+  background-size: 16px;
+  border-radius: 50%;
+  border: 1px solid #8ad1ec;
 }
 
 .edit-btn:hover .tooltip {
@@ -121,7 +124,7 @@ input {
   position: absolute;
   visibility: hidden;
   opacity: 0;
-  transform: translateY(10px);
+  /*transform: translateY(10px);*/
   top: -20px;
   right: 10px;
   padding: 2px 5px;
@@ -251,4 +254,73 @@ li::before {
   background-color: #aaf3ab;
   border-radius: 2px;
   font-size: 12px;
+}
+
+
+/*=============== MODAL =====================*/
+
+.overlay {
+  opacity: 0;
+  visibility: hidden;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+  transition: all 0.3s;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+
+  width: 100%;
+  max-width: 500px;
+
+  opacity: 0;
+  visibility: hidden;
+
+  padding: 20px 50px 50px;
+  box-shadow: 0 3px 10px -.5px rgba(0, 0, 0, .2);
+  text-align: center;
+  border-radius: 3px;
+  transition: 0.3s all;
+  background-color: #f1f1e4;
+}
+
+.modal__title {
+
+}
+
+.modal__title::before {
+  content: "";
+  background-image: url('img/edit.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.modal__cross {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  fill: #444;
+  cursor: pointer;
+}
+
+.link {
+  padding: 5px;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #414b52;
+  margin: 10px;
+  color: #fff;
+  border-radius: 3px;
 }
