@@ -85,10 +85,15 @@ input:focus {
 .button {
   padding: 10px;
   background-color: #aaf3ab;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 2px;
   cursor: pointer;
   outline: transparent;
+  transition: all 0.3s;
+}
+
+.button:hover {
+  border: 2px solid #8ad1ec;
 }
 
 .row {
