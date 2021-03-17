@@ -129,12 +129,31 @@ const toDoObject = {
       if ( array.length === 1 ) document.querySelector('.learned-sort-label').remove();
     }
   },
+  // clearVocab() {
+  //   let {vocab} = toDoObject;
+  //   localStorage.clear('vocab');
+  //   vocab = {toLearn: [], learnedWords: []};
+  //   render();
+  //   localStorage.setItem('vocab', JSON.stringify(vocab));
+  // },
 
   //  отрисовка массива
   render: function render() {
-    let {vocab, refreshTitle, ul, addSorting, ulLearned, removeThings} = toDoObject;
+    const {refreshTitle, ul, addSorting, ulLearned, removeThings, clearVocab} = toDoObject;
+    let {vocab} = toDoObject;
 
-
+    // //Shows DELETE VOCAB button
+    // const deleteAll = document.querySelector('.delete-all');
+    // if ( vocab.toLearn.length > 1 || vocab.learnedWords > 1) {
+    //   deleteAll.classList.add('visible');
+    // } else {
+    //   deleteAll.classList.remove('visible');
+    // }
+    // deleteAll.addEventListener('click', function(e) {
+    //   if ( confirm("Delete all data?") ) {
+    //     clearVocab();
+    //   }
+    // });
 
     // Functions for modal
     function lockScreen() {
@@ -359,20 +378,6 @@ const toDoObject = {
         li.addEventListener('mouseleave', function() {
           li.querySelector('.controls').classList.remove('visible');
         })
-        
-        //Shows DELETE VOCAB button
-        const deleteAll = document.querySelector('.delete-all');
-        if ( array.length > 1 ) {
-          deleteAll.classList.add('visible');
-        } else {
-          deleteAll.classList.remove('visible');
-        }
-        deleteAll.addEventListener('click', function(e) {
-          if ( !confirm("Delete all data?") ) return;
-          vocab = {toLearn: [], learnedWords: []};
-          localStorage.setItem('vocab', JSON.stringify(vocab));
-          render();
-        });
       })
     }
 
