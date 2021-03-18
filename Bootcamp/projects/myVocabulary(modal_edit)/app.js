@@ -1,4 +1,4 @@
-//todo: sorting bug fix, multiple runs bug with confirm deleting, editing bug highlighting new LI when created or switched
+//todo: sorting bug fix, multiple runs bug with confirm deleting, editing bug, highlighting new LI when created or switched
 
 //======= closest lib ========
 !function(e){"function"!=typeof e.matches&&(e.matches=e.msMatchesSelector||e.mozMatchesSelector||e.webkitMatchesSelector||function(e){for(var t=this,o=(t.document||t.ownerDocument).querySelectorAll(e),n=0;o[n]&&o[n]!==t;)++n;return Boolean(o[n])}),"function"!=typeof e.closest&&(e.closest=function(e){for(var t=this;t&&1===t.nodeType;){if(t.matches(e))return t;t=t.parentNode}return null})}(window.Element.prototype);
@@ -29,14 +29,14 @@ const vocabObject = {
   ulLearned: document.querySelector('.learned'),
 
   addNewWord() {
-    const {word, translation, vocab, render} = vocabObject;
+    const {word, translation, vocab, build} = vocabObject;
     if ( word.value && translation.value ) {
       vocab.toLearn.push({
         'word': word.value.toLowerCase(),
         'translation': translation.value.toLowerCase(),
       })
       localStorage.setItem('vocab', JSON.stringify(vocab));
-      render();
+      build();
       word.value = '';
       translation.value = '';
     }
@@ -70,7 +70,7 @@ const vocabObject = {
   },
 
   addSorting(array, place) {
-    const {vocab, sortWords, render, shuffle} = vocabObject;
+    const {vocab, sortWords, build, shuffle} = vocabObject;
     const sortLabel = document.createElement('label');
     sortLabel.className = array === vocab.toLearn ? 'sort-label' : 'learned-sort-label';
     sortLabel.innerHTML = 'Sort by:' +
@@ -83,14 +83,14 @@ const vocabObject = {
       btn.addEventListener('click', function(e) {
         sortWords(array);
         localStorage.setItem('vocab', JSON.stringify(vocab));
-        render();
+        build();
       });
     })
     shuffleButtons.forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         shuffle(array);
         localStorage.setItem('vocab', JSON.stringify(vocab));
-        render();
+        build();
       });
     })
   },
@@ -118,6 +118,8 @@ const vocabObject = {
       [array[i], array[j]] = [array[j], array[i]];
     }
   },
+
+  // Removes sort buttons and title Counters
   removeThings(array) {
     const {vocab} = vocabObject;
     if ( array === vocab.toLearn /* && (document.querySelector('.title-counter') || document.querySelector('.sort-label') )*/) {
@@ -128,6 +130,7 @@ const vocabObject = {
       if ( array.length === 1 ) document.querySelector('.learned-sort-label').remove();
     }
   },
+  // ==========================================================
   // clearVocab() {
   //   let {vocab} = toDoObject;
   //   localStorage.clear('vocab');
@@ -135,13 +138,14 @@ const vocabObject = {
   //   render();
   //   localStorage.setItem('vocab', JSON.stringify(vocab));
   // },
+  // ==========================================================
 
-  //  отрисовка массива
-  render: function render() {
+  //  Building arrays
+  build () {
     const {refreshTitle, ul, addSorting, ulLearned, removeThings, clearVocab} = vocabObject;
     let {vocab} = vocabObject;
 
-    // //Shows DELETE VOCAB button
+    //  ======== Shows DELETE VOCAB button ==========================
     // const deleteAll = document.querySelector('.delete-all');
     // if ( vocab.toLearn.length > 1 || vocab.learnedWords > 1) {
     //   deleteAll.classList.add('visible');
@@ -153,6 +157,7 @@ const vocabObject = {
     //     clearVocab();
     //   }
     // });
+    // ================================================================
 
     // Functions for modal
     function lockScreen() {
@@ -174,7 +179,6 @@ const vocabObject = {
           unlockScreen();
         });
       })
-
     }
 
     // New word adding
@@ -208,14 +212,13 @@ const vocabObject = {
         refreshTitle();
 
 
-        /*
-        //  Highlighting last LI (BUG)
+        /*========= Highlighting last LI (BUG) =========
         const rows = document.querySelectorAll('.row');
         rows[rows.length-1].classList.add('highlighting');
         setInterval(()=> {
           rows[rows.length-1].classList.remove('highlighting');
         }, 1000);
-         */
+         ============================================*/
 
         //creates div for word
         const wordBlock = document.createElement('span');
@@ -235,16 +238,18 @@ const vocabObject = {
         const removeBtn = document.createElement('button');
         removeBtn.classList.add('remove-btn');
         removeBtn.addEventListener('click', function(e) {
-          console.log(1)
           //удаляем из массива объект
           if (confirm(`Delete word "${item.word.toUpperCase()}"?`)) array.splice(index, 1);
           localStorage.setItem('vocab', JSON.stringify(vocab));
           refreshTitle();
           removeThings(array);
+
           //перерисовка
-          render();
+          build();
         });
-        /*
+
+
+        /* ============== DELETE Modal code ===========================================
         let counter = 0;
         removeBtn.addEventListener('click', function(e) {
           counter++;
@@ -266,7 +271,7 @@ const vocabObject = {
             // console.log(index);
             array.splice(index, 1);
             localStorage.setItem('vocab', JSON.stringify(vocab));
-            render();
+            build();
             refreshTitle();
             removeThings(array);
 
@@ -291,6 +296,7 @@ const vocabObject = {
         // //Modal close(cross) button
         // modalClose();
         */
+        //=====================================================================
 
         //  Creates Move  button
         const moveBtn = document.createElement('button');
@@ -307,7 +313,7 @@ const vocabObject = {
           localStorage.setItem('vocab', JSON.stringify(vocab));
           console.log(array);
           //перерисовка
-          render();
+          build();
           refreshTitle();
           removeThings(array);
         });
@@ -332,15 +338,20 @@ const vocabObject = {
           editTranslation.value = item.translation;
 
           // EDIT Modal submit button
+          let subcounter = 0;
+          console.log(`shiet: ${++subcounter}`);
+          let counter = 0;
           const submitBtn = document.querySelector('.form__btn');
           submitBtn.addEventListener('click', function(e) {
+            console.log(`++${counter} = ${++counter}`);
+
             e.preventDefault();
             if ( editWord.value === '' ) editWord.value = item.word;
             if ( editTranslation.value === '' ) editTranslation.value = item.translation;
             item.word = editWord.value;
             item.translation = editTranslation.value;
             localStorage.setItem('vocab', JSON.stringify(vocab));
-            render();
+            build();
 
             // Closing EDIT modal
             const parentModal = this.closest('.modal');
@@ -352,9 +363,6 @@ const vocabObject = {
           });
           modalClose();
         });
-
-
-
 
 
         //  inserting elements
@@ -387,11 +395,11 @@ const vocabObject = {
 }
 
 
-const {addBtn, addNewWord, translation, word, render} = vocabObject;
+const {addBtn, addNewWord, translation, word, build} = vocabObject;
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  render();
+  build();
   const modal = document.querySelector('.modal');
   setTimeout(() => {
     modal.style.display = 'block';

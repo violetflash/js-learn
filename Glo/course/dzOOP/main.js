@@ -36,7 +36,35 @@ function cutter(obj) {
 
   return outputObj;
 }
+console.log("=========== ORIGINAL ================")
 
 console.log(myLesson);
-console.log("==============")
+console.log("========= CUTTER 1 ========")
 console.log(cutter(myLesson));
+
+
+console.log('=============== CUTTER 2 ==================')
+
+function cutter2(obj) {
+  const outputObj = [];
+  obj.forEach((element) => {
+    if ( element.type !== 'additional' ) {
+      const obj = {...element};
+      obj.points /= 2;
+      outputObj.push(obj);
+    }
+  })
+  return outputObj;
+}
+
+
+console.log(cutter2(myLesson));
+
+console.log('============== CUTTER 3 ============')
+
+function cutter3(obj) {
+  const outputObj = obj.reduce(func, []);
+}
+
+
+
