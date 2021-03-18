@@ -1,11 +1,11 @@
-//todo: sorting bug fix, multiple runs bug with confirm deleting, highlighting new LI when created or switched
+//todo: sorting bug fix, multiple runs bug with confirm deleting, editing bug highlighting new LI when created or switched
 
 //======= closest lib ========
 !function(e){"function"!=typeof e.matches&&(e.matches=e.msMatchesSelector||e.mozMatchesSelector||e.webkitMatchesSelector||function(e){for(var t=this,o=(t.document||t.ownerDocument).querySelectorAll(e),n=0;o[n]&&o[n]!==t;)++n;return Boolean(o[n])}),"function"!=typeof e.closest&&(e.closest=function(e){for(var t=this;t&&1===t.nodeType;){if(t.matches(e))return t;t=t.parentNode}return null})}(window.Element.prototype);
 //======
 
 
-const toDoObject = {
+const vocabObject = {
   word: document.querySelector('#word'),
   translation: document.querySelector('#translation'),
   addBtn: document.querySelector('.btn-add'),
@@ -29,7 +29,7 @@ const toDoObject = {
   ulLearned: document.querySelector('.learned'),
 
   addNewWord() {
-    const {word, translation, vocab, render} = toDoObject;
+    const {word, translation, vocab, render} = vocabObject;
     if ( word.value && translation.value ) {
       vocab.toLearn.push({
         'word': word.value.toLowerCase(),
@@ -44,7 +44,7 @@ const toDoObject = {
 
   //обновление заголовка и счетчика слов
   refreshTitle() {
-    const {vocab, title, learnedTitle} = toDoObject;
+    const {vocab, title, learnedTitle} = vocabObject;
 
     //words title
     title.textContent = vocab.toLearn.length > 0 ? 'Words to learn:' : 'No words added';
@@ -70,7 +70,7 @@ const toDoObject = {
   },
 
   addSorting(array, place) {
-    const {vocab, sortWords, render, shuffle} = toDoObject;
+    const {vocab, sortWords, render, shuffle} = vocabObject;
     const sortLabel = document.createElement('label');
     sortLabel.className = array === vocab.toLearn ? 'sort-label' : 'learned-sort-label';
     sortLabel.innerHTML = 'Sort by:' +
@@ -96,7 +96,6 @@ const toDoObject = {
   },
 
   sortWords(array) {
-    // const {vocab} = toDoObject;
     function compare(a, b) {
       if ( a.word < b.word ){
         return -1;
@@ -120,7 +119,7 @@ const toDoObject = {
     }
   },
   removeThings(array) {
-    const {vocab} = toDoObject;
+    const {vocab} = vocabObject;
     if ( array === vocab.toLearn /* && (document.querySelector('.title-counter') || document.querySelector('.sort-label') )*/) {
       if ( array.length === 0 ) document.querySelector('.title-counter').remove();
       if ( array.length === 1 ) document.querySelector('.sort-label').remove();
@@ -139,8 +138,8 @@ const toDoObject = {
 
   //  отрисовка массива
   render: function render() {
-    const {refreshTitle, ul, addSorting, ulLearned, removeThings, clearVocab} = toDoObject;
-    let {vocab} = toDoObject;
+    const {refreshTitle, ul, addSorting, ulLearned, removeThings, clearVocab} = vocabObject;
+    let {vocab} = vocabObject;
 
     // //Shows DELETE VOCAB button
     // const deleteAll = document.querySelector('.delete-all');
@@ -196,16 +195,18 @@ const toDoObject = {
       addSorting(vocab.learnedWords, ulLearned);
     }
 
+
     //  Makes <li> element for each of array's item
     for (const key in vocab) {
       const array = vocab[key];
       array.forEach(function(item, index) {
 
         const li = document.createElement('li');
-        //attribute for the pseudo-el counter
-        li.setAttribute('data-counter', `${index+1})`);
-        refreshTitle();
+        //attribute for the pseudo-el rows counter
+        li.setAttribute('data-counter', `${array.length - index})`);
         li.classList.add('row');
+        refreshTitle();
+
 
         /*
         //  Highlighting last LI (BUG)
@@ -365,9 +366,10 @@ const toDoObject = {
         li.appendChild(controls);
 
         if ( array === vocab.toLearn ) {
-          ul.appendChild(li);
+          ul.prepend(li);
+          // ul.appendChild(li);
         } else if ( array === vocab.learnedWords ) {
-          ulLearned.appendChild(li);
+          ulLearned.prepend(li);
         }
 
 
@@ -385,7 +387,7 @@ const toDoObject = {
 }
 
 
-const {addBtn, addNewWord, translation, word, render} = toDoObject;
+const {addBtn, addNewWord, translation, word, render} = vocabObject;
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -393,7 +395,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const modal = document.querySelector('.modal');
   setTimeout(() => {
     modal.style.display = 'block';
-    console.log(1)
   }, 1000)
 });
 
