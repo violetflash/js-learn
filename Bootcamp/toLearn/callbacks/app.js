@@ -20,10 +20,18 @@ document.body.append(btn);
 // }, 1000);
 
 const moveX = (amount, callback, elem=btn, delay=1000) => {
-  setTimeout( () => {
-    elem.style.transform = `translateX(${amount}px)`;
-    if( callback ) callback();
-  }, delay)
+  const btnObj = elem.getBoundingClientRect();
+  const x = document.body.clientWidth;
+  if ( (btnObj.left + btnObj.width + amount) > x ) {
+    console.log(`I can't`);
+  }
+  else {
+    setTimeout( () => {
+      elem.style.transform = `translateX(${amount}px)`;
+      if( callback ) callback();
+    }, delay)
+  }
+
 
 }
 
@@ -31,7 +39,7 @@ moveX( 100, () => {
   moveX(200, () => {
     moveX(300, () => {
       moveX(400, () => {
-        moveX(500);
+        moveX(1500);
       })
     })
   })
