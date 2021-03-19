@@ -62,9 +62,16 @@ console.log(cutter2(myLesson));
 
 console.log('============== CUTTER 3 ============')
 
-function cutter3(obj) {
-  const outputObj = obj.reduce(func, []);
-}
+const cutter3 = myLesson.reduce( (obj, element) => {
+  if ( element.type !== 'additional' ) {
+    const item = {...element};
+    console.log(item);
+    item.points /= 2;
+    obj.push(item);
+  }
+}, [])
 
+
+console.log(cutter3);
 
 
