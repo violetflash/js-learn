@@ -10,6 +10,7 @@ function ellipsinator(arg) {
     if ( arg.length >= 30 ) {
       return arg.slice(0, 30) + "...";
     }
+    return arg;
   } else {
     return console.log("не строка");
   }

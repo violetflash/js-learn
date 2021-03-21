@@ -91,3 +91,5 @@ console.log(nums.slice().sort( (a, b) => a - b ));
 console.log(nums.slice().sort( (a, b) => b - a ));
 console.log(nums);
 
+
+(function() {alert("Скобки вокруг всего")}() );

@@ -10,3 +10,12 @@ function avg(array) {
 
 console.log(avg([0,50]));
 console.log(avg([75,76,80,95,100]));
+
+function avg2(array) {
+  const sum = array.reduce((accumulator, elem) => {
+    return accumulator + elem;
+  })
+  return sum / array.length;
+}
+
+console.log(avg2([75,76,80,95,100]));

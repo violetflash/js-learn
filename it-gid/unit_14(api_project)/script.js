@@ -1,4 +1,4 @@
-let weather_option = document.querySelector(".weather__option");
+ let weather_option = document.querySelector(".weather__option");
 let dateField = document.querySelector(".date");
 let weatherValues = document.querySelectorAll('.value');
 let city = document.querySelector(".weather__city");

@@ -21,6 +21,11 @@ const myLesson = [
   {lesson: 16, type: 'additional', points: 7},
 ];
 
+console.log("=========== ORIGINAL ================")
+console.log(myLesson);
+
+
+console.log("========= CUTTER 1 ========")
 function cutter(obj) {
   let outputObj = [];
 
@@ -36,15 +41,11 @@ function cutter(obj) {
 
   return outputObj;
 }
-console.log("=========== ORIGINAL ================")
-
-console.log(myLesson);
-console.log("========= CUTTER 1 ========")
 console.log(cutter(myLesson));
 
 
-console.log('=============== CUTTER 2 ==================')
 
+console.log('=============== CUTTER 2 ==================')
 function cutter2(obj) {
   const outputObj = [];
   obj.forEach((element) => {
@@ -56,22 +57,18 @@ function cutter2(obj) {
   })
   return outputObj;
 }
-
-
 console.log(cutter2(myLesson));
 
-console.log('============== CUTTER 3 ============')
 
+console.log('============== CUTTER 3 ============')
 const cutter3 = myLesson.reduce( (obj, element) => {
   if ( element.type !== 'additional' ) {
     const item = {...element};
     console.log(item);
     item.points /= 2;
-    obj.push(item);
+    obj.push({...item});
   }
+  return obj;
 }, [])
 
-
 console.log(cutter3);
-
-
