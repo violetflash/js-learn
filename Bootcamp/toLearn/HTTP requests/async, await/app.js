@@ -33,7 +33,7 @@ fetchNext()
 
 async function getPlanets() {
   try {
-    const res = await axios.get('http://swapi.dev/api/planetsgg/');
+    const res = await axios.get('http://swapi.dev/api/planetsgg/'); //with await it waits for the response
     console.log(res.data.results);
   } catch(e) {  // catches reject of THIS function, not for all as .catch
     console.log('IN CATCH!', e);
