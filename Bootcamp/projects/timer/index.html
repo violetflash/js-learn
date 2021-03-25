@@ -2,14 +2,44 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css">
   <title>Timer</title>
 </head>
 <body>
+  <div class="timer">
+    <div class="controls">
+      <input id="duration" value="10">
+      <div class="">
+        <button id="start"><i class="fas fa-play-circle"></i></button>
+        <button id="pause"><i class="far fa-pause-circle"></i></button>
+      </div>
+    </div>
+  </div>
+  <svg class="dial" height="420" width="420">
+    <circle id="circle"
+            r="190" cx="210" cy="210"
+            fill="transparent"
+            stroke="#E67E22"
+            stroke-width="15"
+            transform="rotate(-90 210 210)"
+    />
+    <circle id="circle"
+            r="200" cx="210" cy="210"
+            fill="transparent"
+            stroke="#454545"
+            stroke-width="5"
+    />
+<!--    <circle id="circle"-->
+<!--            r="200" cx="210" cy="210"-->
+<!--            fill="transparent"-->
+<!--            stroke="lightblue"-->
+<!--            stroke-width="5"-->
+<!--    />-->
+<!--    <circle r="90" cx="100" cy="100" fill="#ffffff"/>-->
+  </svg>
 
-  <input id="duration" value="10">
-  <button id="start">Start</button>
-  <button id="pause">Pause</button>
-
+  <script src="timer.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
