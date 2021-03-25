@@ -8,6 +8,7 @@ class Timer {
       this.onStart = callbacks.onStart;
       this.onTick = callbacks.onTick;
       this.onComplete = callbacks.onComplete;
+      this.onPause = callbacks.onPause;
     }
 
     this.startButton.addEventListener('click', this.start)
@@ -22,6 +23,7 @@ class Timer {
   }
 
   pause = () => {
+    if ( this.onPause ) this.onPause(this.timeRemaining)
     clearInterval(this.interval);
     this.ableStart();
   }
