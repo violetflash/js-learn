@@ -10,6 +10,8 @@ let duration;
 const timer = new Timer(durationInput, startButton, pauseButton, {
   onStart(totalDuration) { //receive timeRemaining from start func
     duration = totalDuration;
+    console.log(duration, '----', savedTime)
+
 
   },
   onTick(timeRemaining) {

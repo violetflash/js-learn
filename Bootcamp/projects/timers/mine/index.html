@@ -14,19 +14,18 @@
       <input id="duration" type="number" value="10">
       <div class="controls">
         <button id="start"><i class="far fa-play-circle"></i></button>
-        <button id="stop"><i class="far fa-stop-circle"></i></button>
+        <button id="stop" disabled=true><i class="far fa-pause-circle"></i></button>
       </div>
     </div>
     <svg class="animation" width="420" height="420">
       <circle id="circle"
-              r="200"
-              cx="210"
-              cy="210"
+              r="190" cx="210" cy="210"
               fill="transparent"
               stroke="lightblue"
               stroke-width="10"
+              transform="rotate(-90 210 210)"
       />
-      <circle r="190"
+      <circle r="180"
               cx="210"
               cy="210"
               fill="transparent"

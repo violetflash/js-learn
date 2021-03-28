@@ -1,3 +1,10 @@
+// fetch('http://www.omdbapi.com/?apikey=a2f944ea&t=knight')
+//   .then((response) => {
+//     response.json().then((data) => {
+//       console.log(data);
+//     })
+//   })
+
 const checkStatusAndParse = (response) => {
   if ( !response.ok ) {
     throw new Error(`Error status code: ${response.status}`);
