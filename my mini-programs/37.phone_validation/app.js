@@ -31,7 +31,8 @@ function validReport(obj) {
 const input = document.querySelector('.input');
 
 input.addEventListener('input', function(e) {
-  this.value = this.value.replace(/[^0-9()-]/g, '');
+  // this.value = this.value.replace(/[^\d()-]/g, '').replace(/\+7[\d()-]{10}|8[\d()-]{10}/g, '');
+  this.value = this.value.replace(/[^+7[0-9()-]{10}]|[^8[\d()-]{10}]/g, '');
 });
 
 // input.addEventListener('blur', function(e) {
