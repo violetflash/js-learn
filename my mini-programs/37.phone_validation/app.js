@@ -31,8 +31,13 @@ function validReport(obj) {
 const input = document.querySelector('.input');
 
 input.addEventListener('input', function(e) {
-  // this.value = this.value.replace(/[^\d()-]/g, '').replace(/\+7[\d()-]{10}|8[\d()-]{10}/g, '');
-  this.value = this.value.replace(/[^+7[0-9()-]{10}]|[^8[\d()-]{10}]/g, '');
+
+  function replacer(match, p1, p2, p3, p4, p5, offset, string) {
+    // p1-'digits', p2-'(', p3-')', p4-'+', p5-'-'
+    return [p4, p2, p1, p3].join();
+  }
+
+  this.value = this.value.replace(/[(\d)*](\()(\))(\+)(-)/g, replacer);
 });
 
 // input.addEventListener('blur', function(e) {
@@ -45,3 +50,5 @@ input.addEventListener('input', function(e) {
 //     this.value = name;
 //   }
 // });
+
+
