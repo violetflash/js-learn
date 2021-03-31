@@ -6,7 +6,7 @@ const fetchData = async searchTerm => {
     }
   });
 
-  if ( response.data.Error ) return [];
+  if ( response.data.Error ) return []; //handling an error with no data returned
 
   return response.data.Search;
 }
@@ -19,30 +19,31 @@ root.innerHTML = `
       <div class="dropdown">
       <div class="dropdown-menu">
         <div class="dropdown-content results">
-          <a class="dropdown-item" href="">Movie #1</a>
-          <a class="dropdown-item" href="">Movie #2</a>
-          <a class="dropdown-item" href="">Movie #3</a>
         </div>
       </div>
     </div>
-`
-
+`;
 
 const input  = document.querySelector('.input');
+const dropdown = document.querySelector('.dropdown');
+const resultsWrapper = document.querySelector('.results');
+
+
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
   // movies.then((res) => {
   //   console.log(res);
   // });
-  document.querySelector('#target').innerHTML = '';
+  resultsWrapper.innerHTML = '';
+  dropdown.classList.add('is-active');
   for (const movie of movies) {
-    const div = document.createElement('div');
-    div.innerHTML = `
-      <h1>${movie.Title} (${movie.Year})</h1>
+    const option = document.createElement('a');
+    option.innerHTML = `
       <img src="${movie.Poster}" alt="${movie.Title}"/>
+      <h1>${movie.Title} (${movie.Year})</h1>
     `
-
-    document.querySelector('#target').append(div);
+    option.className = 'dropdown-item';
+    resultsWrapper.append(option);
   }
 };
 
