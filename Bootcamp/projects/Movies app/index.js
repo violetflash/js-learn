@@ -1,3 +1,5 @@
+'use strict';
+
 const fetchData = async searchTerm => {
   const response = await axios.get('http://www.omdbapi.com/', {
     params: {
@@ -9,7 +11,7 @@ const fetchData = async searchTerm => {
   if ( response.data.Error ) return []; //handling an error with no data returned
 
   return response.data.Search;
-}
+};
 
 const root = document.querySelector('.autocomplete');
 root.innerHTML = `
@@ -29,19 +31,29 @@ const dropdown = document.querySelector('.dropdown');
 const resultsWrapper = document.querySelector('.results');
 
 
+document.addEventListener('click', e => {
+  if (!root.contains(e.target)) {
+    dropdown.classList.remove('is-active');
+  }
+});
+
 const onInput = async (event) => {
   const movies = await fetchData(event.target.value);
-  // movies.then((res) => {
-  //   console.log(res);
-  // });
+
+  if (!movies.length) {
+    dropdown.classList.remove('is-active');
+    return;
+  }
+
   resultsWrapper.innerHTML = '';
   dropdown.classList.add('is-active');
   for (const movie of movies) {
     const option = document.createElement('a');
+    const imageSRC = movie.Poster === 'N/A' ? '' : movie.Poster;
     option.innerHTML = `
-      <img src="${movie.Poster}" alt="${movie.Title}"/>
+      <img src="${imageSRC}" alt="${movie.Title}"/>
       <h1>${movie.Title} (${movie.Year})</h1>
-    `
+    `;
     option.className = 'dropdown-item';
     resultsWrapper.append(option);
   }

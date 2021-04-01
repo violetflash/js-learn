@@ -25,19 +25,19 @@ ladder.up().up().down().showStep(); // 1
  */
 
 let ladder = {
-    step: 0,
-    up() {
-        this.step++;
-        return this;    // Решением является возврат самого объекта в каждом методе.
-    },
-    down() {
-        this.step--;
-        return this;
-    },
-    showStep: function() { // показывает текущую ступеньку
-        alert( this.step );
-        return this;
-    }
+  step: 0,
+  up() {
+    this.step++;
+    return this;    // Решением является возврат самого объекта в каждом методе.
+  },
+  down() {
+    this.step--;
+    return this;
+  },
+  showStep: function() { // показывает текущую ступеньку
+    alert(this.step);
+    return this;
+  }
 };
 
 ladder.up().up().down().down().down().down().showStep();
