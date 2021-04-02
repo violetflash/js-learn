@@ -56,6 +56,14 @@ const onInput = async (event) => {
     `;
     option.className = 'dropdown-item';
     resultsWrapper.append(option);
+    
+    option.addEventListener('click', () => {
+      dropdown.classList.remove('is-active');
+      input.value = movie.Title;
+
+      //fetch movie
+      //render movie
+    });
   }
 };
 
