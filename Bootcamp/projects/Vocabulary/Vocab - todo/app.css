@@ -64,6 +64,18 @@ input:focus {
   border-bottom: 1px solid #8ad1ec;
 }
 
+.error {
+  position: relative;
+  border-bottom: 1px solid red !important;
+}
+
+.error::before {
+  position: absolute;
+  content: 'required field!';
+  width: 100%;
+  bottom: -5px;
+}
+
 .main {
   margin: 100px 0 0;
   padding: 20px 50px 50px;
@@ -219,7 +231,7 @@ input:focus {
   transition: all 0.3s ease-in-out;
 }
 
-.visible {
+.is-visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
