@@ -23,7 +23,9 @@ const clearFields = (...args) => {
 
 const render = function() {
   //Очищаем листы
-  for (const elem of [learnList, learnedList]) elem.innerHTML = '';
+  for (const elem of [learnList, learnedList]) {
+    elem.innerHTML = '';
+  }
 
   function renderList(obj, list, moveBtnName, moveToObjName) {
     Object.values(obj).forEach((item, index) => {
@@ -35,30 +37,58 @@ const render = function() {
           <span class="translation">${item.translation}</span>
           <div class="controls">
           <button class="remove-btn" type="button"></button> 
-          <button class="move-btn" type="button">Move to ${moveBtnName}</button> 
+          <button class="move-btn" type="button">В ${moveBtnName}</button> 
           <a class="edit-btn">
             <span class="tooltip">Edit</span>
           </a> 
           </div>
       `;
-      list.prepend(li);
       li.addEventListener('mouseover', function(e) {
-        document.querySelector('.controls').classList.add('is-visible');
+        li.querySelector('.controls').classList.add('is-visible');
       });
       li.addEventListener('mouseleave', function(e) {
-        document.querySelector('.controls').classList.remove('is-visible');
+        li.querySelector('.controls').classList.remove('is-visible');
       });
+      list.prepend(li);
+
+      //MOVE BUTTON
+      li.querySelector('.move-btn').addEventListener('click', () => {
+        if (obj === vocabData.toLearn) {
+          vocabData.learnedWords.push(item);
+        } else if (obj === vocabData.learnedWords) {
+          vocabData.toLearn.push(item);
+        }
+        obj.splice(index, 1);
+        console.log(vocabData);
+        localStorage.setItem('vocabData', JSON.stringify(vocabData));
+        render();
+      });
+
+      li.querySelector('.remove-btn').addEventListener('click', () => {
+        obj.splice(index, 1);
+        li.remove();
+        localStorage.setItem('vocabData', JSON.stringify(vocabData));
+        render();
+      });
+
+      document.querySelectorAll('.word').forEach((elem) => {
+        elem.addEventListener('click', function(e) {
+          this.innerHTML = `<input class="edit-word" type="text" value="${this.innerText}">`;
+        });
+      });
+
+      //EDIT
+
     });
   }
 
-  renderList(vocabData.toLearn, learnList, 'Learned', vocabData.learnedWords);
-  renderList(vocabData.learnedWords, learnList, 'Vocab', vocabData.toLearn);
-
+  renderList(vocabData.toLearn, learnList, 'Выполненные задачи', vocabData.learnedWords);
+  renderList(vocabData.learnedWords, learnedList, 'Текущие задачи', vocabData.toLearn);
 
 };
 
-const vocabulary = function(root) {
-
+const vocabulary = function() {
+  render();
   document.querySelectorAll('.form-input').forEach((elem) => {
     elem.addEventListener('input', () => {
       elem.classList.remove('error');
@@ -78,19 +108,20 @@ const vocabulary = function(root) {
     }
 
     vocabData.toLearn.push({word, translation});
-    // console.log(vocabData);
     clearFields(wordInput, translationInput);
     localStorage.setItem('vocabData', JSON.stringify(vocabData));
     render();
-
   });
-  render();
 
+  //EDIT WORD
+  if (document.querySelector('.word')) {
+
+  }
 
 };
 
 
-vocabulary(content);
+vocabulary();
 
 
 
