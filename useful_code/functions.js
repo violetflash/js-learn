@@ -1,7 +1,20 @@
+'use strict';
 //проверка на число
 let isNumber = function(n){
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
+
+//проверка на строку
+const isString = function(str) {
+  return str && isNaN(parseFloat(str));
+};
+
+/*
+let b;
+do {
+    b = prompt("add string");
+} while (!isString(b));
+ */
 
 //=====================================================
 //обрезание строки
@@ -73,8 +86,8 @@ const debounce = (func, delay=1000) => {
       //
       func.apply(null, args); // like 'func(arg1, arg2, arg3)' - apply automatically keeps track of how many arguments we need to pass through
     }, delay);
-  }
-}
+  };
+};
 //=========================================================
 
 
@@ -86,3 +99,34 @@ function removeElementsByClass(className) {
   }
 }
 //==========================================================
+
+
+//Логгирование
+const logger = function(callback) {
+  return function() {
+    const args = Array.prototype.slice.call(arguments);
+    const res = callback.apply(null, args); //or callback(...args) - spread
+    console.log(`
+    Вызов функции ${callback.name} с аргументами ${args}
+    Результат вызова: ${res}`);
+  };
+};
+
+const sum = function(a, b ,c) {
+  return a + b + c;
+};
+
+const sumLog = logger(sum);
+const result = sumLog(2,4,6);
+console.log(result);
+
+
+//EACHER
+const eacher = function(arr, callback) {
+  let count = 0;
+  const timer = setInterval(function() {
+    callback(arr[count++]);
+    if (count > arr.length) clearInterval(timer);
+  }, 0);
+};
+
