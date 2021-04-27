@@ -100,7 +100,7 @@ function removeElementsByClass(className) {
 }
 //==========================================================
 
-
+//=======================  ФУНКЦИИ ДЕКОРАТОРЫ =============================================
 //Логгирование
 const logger = function(callback) {
   return function() {
@@ -126,7 +126,58 @@ const eacher = function(arr, callback) {
   let count = 0;
   const timer = setInterval(function() {
     callback(arr[count++]);
-    if (count > arr.length) clearInterval(timer);
+    if (count > arr.length) {
+      clearInterval(timer);
+    }
   }, 0);
 };
+
+
+// SIMPLE WRAPPER
+const wrapper = fn => {
+  console.log(`Оборачиваем функцию ${fn.name}`);
+  return (...args) => {
+    console.log(`Вызов обёртки для ${fn.name}`);
+    console.log('Аргументы:');
+    console.dir({args} );
+    const result = fn(...args); //    const result = fn.apply(null, args);
+    console.log(`Результат функции ${fn.name}: `);
+    console.dir({result});
+    return result;
+  };
+};
+
+const example = function(a, b) {
+  return  a + b;
+};
+
+const exampleWrapper = wrapper(example);
+console.log(`example(2, 3): ${exampleWrapper(2, 3)}`);
+
+
+//Предварительный вызов и вызов после вызова основной функции
+
+//эти функции могут быть любыми (для задач)
+const bf = (...args) => {
+  console.log('before: ', args);
+  return args;
+};
+
+const af = (result) => {
+  console.log('after: ', result);
+  return result;
+};
+
+//функция обертка для основной функции (fn)
+const wrapper2 = (before, fn,  after) => (...args) => after( fn(...before(...args)) );
+
+const example2 = (a, b, c) => {
+  console.log(`Функция выполняется ${a}, ${b}, ${c}`);
+  return a + b + c;
+};
+
+const exampleWrapper2 = wrapper2(bf, example2, af);
+exampleWrapper2(1, 3, 6);
+
+
 

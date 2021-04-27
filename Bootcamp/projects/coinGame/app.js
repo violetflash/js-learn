@@ -1,3 +1,5 @@
+'use strict';
+
 function isTouching(a, b) {
   const aRect = a.getBoundingClientRect();
   const bRect = b.getBoundingClientRect();
@@ -12,9 +14,18 @@ function isTouching(a, b) {
 
 const dog = document.querySelector('#player');
 const coin = document.querySelector('#coin');
-console.dir(dog)
-const extractLeft = (pos) => parseInt(pos);
 
+const extractPos = (pos) => parseInt(pos);
+
+const moveHorizontal = (element, amount) => {
+  const leftPos = extractPos(getComputedStyle(element).left);
+  element.style.left = `${leftPos + amount}px`;
+};
+
+const moveVertical = (element, amount) => {
+  const topPos = extractPos(getComputedStyle(element).top);
+  element.style.top = `${topPos + amount}px`;
+};
 
 window.addEventListener('keyup', function(e) {
   if ( isTouching(dog, coin) ) {
@@ -37,22 +48,12 @@ window.addEventListener('keyup', function(e) {
   }
 });
 
-const moveHorizontal = (element, amount) => {
-  const leftPos = extractLeft(getComputedStyle(element).left);
-  element.style.left = `${leftPos + amount}px`;
-}
-
-const moveVertical = (element, amount) => {
-  const topPos = extractLeft(getComputedStyle(element).top);
-  element.style.top = `${topPos + amount}px`;
-}
-
 const moveCoin = () => {
-  const x = Math.floor(Math.random() * window.innerWidth - 100);
-  const y = Math.floor(Math.random() * window.innerHeight -100);
+  const x = Math.floor(Math.random() * window.innerWidth) - 100;
+  const y = Math.floor(Math.random() * window.innerHeight) - 100;
   coin.style.left = `${x}px`;
   coin.style.top = `${y}px`;
-}
+};
 
 moveCoin();
 // window.addEventListener('keyup', function(e) {
