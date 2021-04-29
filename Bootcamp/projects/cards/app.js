@@ -13,3 +13,27 @@
 Оцениваться будет в основном чистота кода и правильность реализации.
     В случае идеального кода у претендентов - будем смотреть на стили.
 */
+
+/*
+function reqListener () {
+  console.log(this.responseText);
+}
+
+var oReq = new XMLHttpRequest();
+oReq.onload = reqListener;
+oReq.open("get", "yourFile.txt", true);
+oReq.send();
+ */
+
+const firstReq = new XMLHttpRequest();
+firstReq.addEventListener('load', function() {
+    console.log('FIRST REQUEST WORKED!');
+    const data = JSON.parse(this.responseText);
+    console.log(data);
+});
+firstReq.addEventListener('error', () => {
+    console.log('ERROR!');
+});
+firstReq.open('GET', 'base.json', true);
+firstReq.send();
+console.log('Request Sent!');
