@@ -1,3 +1,5 @@
+'use strict';
+
 /*
 Задания на КОНКУРС ЛУЧШИХ РАБОТ
 1) Загрузить JSON файл
@@ -14,26 +16,24 @@
     В случае идеального кода у претендентов - будем смотреть на стили.
 */
 
-/*
-function reqListener () {
-  console.log(this.responseText);
-}
 
-var oReq = new XMLHttpRequest();
-oReq.onload = reqListener;
-oReq.open("get", "yourFile.txt", true);
-oReq.send();
- */
 
 const firstReq = new XMLHttpRequest();
+firstReq.overrideMimeType("application/json");
+
 firstReq.addEventListener('load', function() {
     console.log('FIRST REQUEST WORKED!');
     const data = JSON.parse(this.responseText);
+    for (const hero of data) {
+        console.log(hero.name);
+    }
     console.log(data);
 });
+
 firstReq.addEventListener('error', () => {
     console.log('ERROR!');
 });
-firstReq.open('GET', 'base.json', true);
+
+firstReq.open('GET', './base.json');
 firstReq.send();
 console.log('Request Sent!');
