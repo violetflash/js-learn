@@ -11,11 +11,13 @@
 </head>
 <body>
     <form id="myform">
-        <label for="phone">phone</label>
-        <input type="text" id="phone" name="phone" placeholder="phone" autocomplete="off">
+        <div><label for="phone">phone</label>
+            <input type="text" id="phone" name="phone" placeholder="phone" autocomplete="off">
+        </div>
         <br>
-        <label for="email">email</label>
-        <input type="text" id="email" name="email" placeholder="email" autocomplete="off">
+        <div><label for="email">email</label>
+            <input type="text" id="email" name="email" placeholder="email" autocomplete="off">
+        </div>
         <br>
         <button type="reset">submit</button>
         <button type="submit">reset</button>
@@ -27,8 +29,20 @@
 <script>
     const valid = new Validator({
         selector: '#myform',
-        pattern: {},
-        method: {},
+        pattern: {
+            phone: /^\+380\d{7}$/,
+            zip: /\d{5,6}/
+        },
+        method: {
+            'phone': [
+                ['notEmpty'],
+                ['pattern', 'phone']
+            ],
+            'email': [
+                ['notEmpty'],
+                ['pattern', 'email']
+            ]
+        },
     })
 
     valid.init();

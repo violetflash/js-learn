@@ -15,11 +15,37 @@ class Validator {
         this.applyStyle();
         this.setPattern();
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.checkIt));
+        this.form.addEventListener('submit', e => {
+            this.elementsForm.forEach(elem => this.checkIt({target: elem}));
+            if (this.error.size) {
+                e.preventDefault();
+                return;
+            }
+            console.log('отправлено');
+        });
     }
 
     isValid(elem) {
-        console.log(this.error);
-        return false;
+        const validatorMethod = {
+            notEmpty(elem) {
+                return elem.value.trim() !== '';
+            },
+            pattern(elem, pattern) {
+                return pattern.test(elem.value);
+            }
+        };
+
+        if (this.method) {
+            const method = this.method[elem.id];
+
+            if (method) {
+                return method.every(item => validatorMethod[item[0]](elem, this.pattern[item[1]]));
+            }
+        } else {
+            console.warn('Необходимо передать id полей ввода и методы проверки этих полей');
+        }
+
+        return true;
     }
 
     checkIt(event) {
@@ -32,13 +58,14 @@ class Validator {
             this.showError(target);
             this.error.add(target);
         }
+        console.log(this.error.size);
     }
 
     showError(elem) {
         elem.classList.remove('success');
         elem.classList.add('error');
-        if (elem.nextElementSibling.classList.contains('validate-error')) {
-          return;
+        if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validate-error')) {
+            return;
         }
         const errorDiv = document.createElement('div');
         errorDiv.textContent = 'Ошибка в этом поле';
@@ -49,6 +76,9 @@ class Validator {
     showSuccess(elem) {
         elem.classList.remove('error');
         elem.classList.add('success');
+        if (elem.nextElementSibling && elem.nextElementSibling.classList.contains('validate-error')) {
+            elem.nextElementSibling.remove();
+        }
     }
 
     applyStyle() {
@@ -70,7 +100,13 @@ class Validator {
     }
 
     setPattern() {
-      
+        if (!this.pattern.phone) {
+            this.pattern.phone = /^\+?[78]([-()]*\d){10}$/;
+        }
+
+        if (!this.pattern.email) {
+            this.pattern.email = /^\w+@\w+\.\w{2,}$/;
+        }
     }
 }
 
