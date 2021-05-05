@@ -11,7 +11,7 @@ const checkStatusAndParse = (response) => {
   } else {
     return response.json();
   }
-}
+};
 
 const printPlanets = (data) => {
   data.results.forEach((item) => {

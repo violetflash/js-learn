@@ -51,28 +51,32 @@ const headerImgArrival = () => {
     //     }
     // });
     let counter = 0;
+
     const moveImg = () => {
         if (headerImg.offsetTop < 0) {
-            headerImg.style.top = 10 + counter + 'px';
+            headerImg.style.top = counter + 'px';
+            console.log(headerImg.offsetTop);
+        } else {
+            clearInterval(headerInterval);
         }
         counter += 10;
     };
-    const headerInterval = setInterval(moveImg, 1000);
+    const headerInterval = setInterval(moveImg, 100);
     headerImg.style.position = 'block';
 };
 
 document.addEventListener('DOMContentLoaded', () => {
     headerImgArrival();
-
-
 });
 
 
 
-const firstReq = new XMLHttpRequest();
-firstReq.overrideMimeType("application/json");
+const request = new XMLHttpRequest();
+request.open('GET', './base.json');
+request.setRequestHeader('Content-type', 'application/json');
+// request.overrideMimeType("application/json");
 
-firstReq.addEventListener('load', function() {
+request.addEventListener('load', function() {
     console.log('FIRST REQUEST WORKED!');
     const data = JSON.parse(this.responseText);
     for (const hero of data) {
@@ -81,10 +85,24 @@ firstReq.addEventListener('load', function() {
     console.log(data);
 });
 
-firstReq.addEventListener('error', () => {
+request.addEventListener('error', () => {
     console.log('ERROR!');
 });
 
-firstReq.open('GET', './base.json');
-firstReq.send();
+request.send();
 console.log('Request Sent!');
+
+
+const createAutoComplete = ({ root, renderOption, onOptionSelect, inputValue, fetchData }) => {
+    root.innerHTML = `
+      <label><b>Select the Movie</b></label>
+      <input class="input" type="text">
+      
+      <div class="dropdown">
+      <div class="dropdown-menu">
+        <div class="dropdown-content results">
+        </div>
+      </div>
+    </div>
+    `;
+};
