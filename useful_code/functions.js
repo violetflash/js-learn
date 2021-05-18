@@ -242,3 +242,10 @@ function maskPhone(selector, masked = '+7 (___) ___-__-__') {
 // use
 
 maskPhone('селектор элементов', 'маска, если маску не передать то будет работать стандартная +7 (___) ___-__-__');
+
+//==============FADE OUT
+const s = document.getElementById('thing').style;
+s.opacity = 1;
+(function fade() {
+  (s.opacity -= 0.1) < 0 ? s.display = "none" : setTimeout(fade, 40);
+})();
