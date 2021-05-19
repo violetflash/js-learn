@@ -4,12 +4,14 @@ const {
     Runner,
     World,
     Bodies,
-    MouseConstraint,
-    Mouse
 } = Matter;
 
-const width = 800;
+
+const cells = 3;
+const width = 600;
 const height = 600;
+const wallWidth = 40;
+
 
 //matter Boilerplate
 const engine = Engine.create();
@@ -31,30 +33,29 @@ const render = Render.create({
 
 Render.run(render);     //render our object
 Runner.run(Runner.create(), engine);        //what coordinates all these changes from state A to state B of our engine
-//adding mouse drag-n-drop ability
-World.add(world, MouseConstraint.create(engine, {
-    mouse: Mouse.create(render.canvas)
-}));
 
 // Walls that prevents shapes to go through them
+const x = width / 2;    //horizontal center of canvas to create a wall shape
+const y = height / 2;   //vertical center of canvas to create a wall shape
+
 const walls = [
     //top wall
-    Bodies.rectangle(400, 0, 800, 40, {
+    Bodies.rectangle(x, 0, width, wallWidth, {
         isStatic: true,
-        fillStyle: 'yellow',
+        StrokeStyle: 'yellow',
     }),
     //bottom
-    Bodies.rectangle(400, 600, 800, 40, {
+    Bodies.rectangle(x, height, width, wallWidth, {
         isStatic: true,
 
     }),
     //left
-    Bodies.rectangle(0, 300, 40, 600, {
+    Bodies.rectangle(0, y, wallWidth, height, {
         isStatic: true,
 
     }),
     // right
-    Bodies.rectangle(800, 300, 40, 600, {
+    Bodies.rectangle(width, y, wallWidth, height, {
         isStatic: true,
 
     }),
@@ -63,21 +64,64 @@ const walls = [
 World.add(world, walls);
 
 
-//Random shapes
-for (let i = 0; i < 50; i++) {
-    const randX = Math.random() * width;
-    const randY = Math.random() * height;
-    if (Math.random() > 0.5) {
-        World.add(world, Bodies.rectangle(randX, randY, 50, 50));
-    } else {
-        World.add(world, Bodies.circle(randX, randY, 35, {
-            //option how its rendered on the screen
-            render: {
-                fillStyle: 'green'
-            }
-        }));
+//Maze generation
 
+const shuffle = (arr) => {
+    let counter = arr.length;
+
+    while (counter > 0) {
+        const index = Math.floor(Math.random() * counter);
+
+        counter--;
+
+        const temp = arr[counter];
+        arr[counter] = arr[index];
+        arr[index] = temp;
     }
+    return arr;
+};
 
-}
+// a better way to build nested arrays
+const grid = Array(cells).fill(null)
+    .map(() => Array(cells).fill(false));
 
+//verticals array tracks walls in a row
+const verticals = Array(cells).fill(null)
+    .map(() => Array(cells - 1).fill(false));
+//horizontals array tracks walls in column
+const horizontals = Array(cells - 1).fill(null)
+    .map(() => Array(cells).fill(false));
+
+const startRow = Math.floor(Math.random() * cells);
+const startColumn = Math.floor(Math.random() * cells);
+
+const stepThroughCell = (row, column) => {
+    //  if i have visited the cell at [row, column], then return;
+    if (grid[row][column]) {   // if grid[row][column] === true
+        return;
+    }
+    //  Mark this cell as being visited
+    grid[row][column] = true;
+    //  Assemble randomly-ordered list of neighbors
+    //coords of neighbor
+    const neighbors = shuffle([
+        [row - 1, column],
+        [row, column + 1],
+        [row + 1, column],
+        [row, column - 1]
+    ]);
+    console.log(neighbors);
+
+    //  For each neighbor...
+
+    //  See if that neighbor is out of bounds
+
+    //if we have visited that neighbor, continue to next neighbor
+
+    //  Remove a wall from either horizontals or verticals
+
+    //  visit that next cell
+};
+
+stepThroughCell(startRow, startColumn);
+console.log(grid);
