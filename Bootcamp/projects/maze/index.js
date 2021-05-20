@@ -4,19 +4,30 @@ const {
     Runner,
     World,
     Bodies,
+    Body,
+    Events,
 } = Matter;
 
 
-const cells = 3;
-const width = 600;
-const height = 600;
-const wallWidth = 40;
+const cellsHorizontal = 4;
+const cellsVertical = 3;
+const width = window.innerWidth;
+const height = window.innerHeight;
+const boundWallsWidth = 2;
+const wallSize = 10;
+const wallsFactor = wallSize * 0.25;
 
-const unitLength = width / cells;
+const unitLengthX = width / cellsHorizontal;
+const unitLengthY = height / cellsVertical;
 
+const goalSize = unitLength * 0.7;
+const ballSize = unitLength * 0.3;
+
+const step = 5;
 
 //matter Boilerplate
 const engine = Engine.create();
+engine.world.gravity.y = 0;
 const { world } = engine;   //got access to the world that created with this engine
 
 
@@ -42,22 +53,22 @@ const y = height / 2;   //vertical center of canvas to create a wall shape
 
 const walls = [
     //top wall
-    Bodies.rectangle(x, 0, width, wallWidth, {
+    Bodies.rectangle(x, 0, width, boundWallsWidth, {
         isStatic: true,
         StrokeStyle: 'yellow',
     }),
     //bottom
-    Bodies.rectangle(x, height, width, wallWidth, {
+    Bodies.rectangle(x, height, width, boundWallsWidth, {
         isStatic: true,
 
     }),
     //left
-    Bodies.rectangle(0, y, wallWidth, height, {
+    Bodies.rectangle(0, y, boundWallsWidth, height, {
         isStatic: true,
 
     }),
     // right
-    Bodies.rectangle(width, y, wallWidth, height, {
+    Bodies.rectangle(width, y, boundWallsWidth, height, {
         isStatic: true,
 
     }),
@@ -68,7 +79,7 @@ World.add(world, walls);
 
 //Maze generation
 
-const shuffle = (arr) => {
+const shuffle = arr => {
     let counter = arr.length;
 
     while (counter > 0) {
@@ -113,7 +124,7 @@ const stepThroughCell = (row, column) => {
         [row, column - 1, 'left']
     ]);
     //  For each neighbor...
-    for (let neighbor of neighbors) {
+    for (const neighbor of neighbors) {
         const [nextRow, nextColumn, direction] = neighbor;
         //  See if that neighbor is out of bounds
         if (nextRow < 0 || nextRow >= cells || nextColumn < 0 || nextColumn >= cells) {
@@ -142,10 +153,10 @@ const stepThroughCell = (row, column) => {
 
 stepThroughCell(startRow, startColumn);
 
-
+//======================= RENDERING WALLS ==========================
 horizontals.forEach((row, rowIndex) => {
-    row.forEach((open, columnIndex) => {
-        if (open) {
+    row.forEach((way, columnIndex) => {
+        if (way) {
             return;
         }
 
@@ -153,11 +164,100 @@ horizontals.forEach((row, rowIndex) => {
             columnIndex * unitLength + unitLength / 2,
             rowIndex * unitLength + unitLength,
             unitLength,
-            10,
+            wallSize,
             {
+                label: 'wall',
                 isStatic: true,
             }
         );
         World.add(world, wall);
+    });
+});
+
+verticals.forEach((row, rowIndex) => {
+    row.forEach((way, columnIndex) => {
+        if (way) {
+            return;
+        }
+
+        const wall = Bodies.rectangle(
+            columnIndex * unitLength + unitLength,
+            rowIndex * unitLength + unitLength / 2,
+            wallSize,
+            unitLength,
+            {
+                label: 'wall',
+                isStatic: true,
+            }
+        );
+        World.add(world, wall);
+    });
+});
+
+
+// =================== GOAL RENDER =============================
+const goal = Bodies.rectangle(
+    width - unitLength / 2 + wallsFactor,
+    height - unitLength / 2 + wallsFactor,
+    goalSize,
+    goalSize,
+    {
+        label: 'goal',
+        isStatic: true,
+    }
+);
+
+World.add(world, goal);
+
+//================= BALL RENDER ===============================
+const ball = Bodies.circle(
+    unitLength / 2 - wallsFactor,
+    unitLength / 2 - wallsFactor,
+    ballSize,
+    {
+        label: 'ball',
+        // isStatic: true,
+    },
+);
+
+World.add(world, ball);
+
+document.addEventListener('keydown', e => {
+    const { x, y } = ball.velocity;
+    if (e.key === 'ArrowUp' || e.keyCode === 87) {
+        Body.setVelocity(ball, { x, y: y - step });
+    }
+
+    if (e.key === 'ArrowRight' || e.keyCode === 68) {
+        Body.setVelocity(ball, { x: x + step, y });
+    }
+
+    if (e.key === 'ArrowDown' || e.keyCode === 83) {
+        Body.setVelocity(ball, { x, y: y + step });
+    }
+
+    if (e.key === 'ArrowLeft' || e.keyCode === 65) {
+        Body.setVelocity(ball, { x: x - step, y });
+    }
+});
+
+//================ WIN CONDITION ===========================
+
+Events.on(engine, 'collisionStart', event => {
+    event.pairs.forEach(collision => {
+        const labels = ['ball', 'goal'];
+
+        if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
+            world.gravity.y = 1;
+            world.bodies.forEach(elem => {
+                if (elem.label === 'wall') {
+                    Body.setStatic(elem, false);
+                }
+                if (elem.label === 'ball') {
+                    console.dir(Body);
+                    Body.setScale(elem, 2);
+                }
+            });
+        }
     });
 });
