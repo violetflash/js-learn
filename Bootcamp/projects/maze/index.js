@@ -260,7 +260,9 @@ Events.on(engine, 'collisionStart', event => {
                 if (elem.label === 'wall') {
                     Body.setStatic(elem, false);
                 }
-
+                if (elem.label === 'ball') {
+                    Body.setStatic(elem, true);
+                }
             });
         }
     });
