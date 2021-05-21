@@ -13,7 +13,7 @@ const cellsVertical = 10;
 const width = document.documentElement.clientWidth;
 const height = document.documentElement.clientHeight;
 const boundWallsWidth = 2;
-const wallSize = 10;
+const wallSize = 4;
 const wallsFactor = wallSize * 0.25;
 
 const unitLengthX = width / cellsHorizontal;
@@ -222,6 +222,7 @@ const ball = Bodies.circle(
             }
         },
         inertia: Infinity,
+        restitution: 0
     },
 );
 
