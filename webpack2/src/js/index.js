@@ -1,7 +1,7 @@
-// import './index.html';
-// import './css/style.css';
-import '../styles/index.scss';
-
+import '../index.html';
+import '../styles/style.scss';
+// import '../scss/style.scss';
+// import imageJpg from './img/js.jpg';
 import Vocab from './modules/Vocab';
 
 const myVocab = new Vocab({
