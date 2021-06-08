@@ -249,3 +249,9 @@ s.opacity = 1;
 (function fade() {
   (s.opacity -= 0.1) < 0 ? s.display = "none" : setTimeout(fade, 40);
 })();
+
+
+//Kebab-case to camel case
+const camelizer = (str) => {
+  return str.replace(/(?<=-)./gi, (match) => match.toUpperCase()).replace(/-/g, '');
+};
