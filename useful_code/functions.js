@@ -255,3 +255,6 @@ s.opacity = 1;
 const camelizer = (str) => {
   return str.replace(/(?<=-)./gi, (match) => match.toUpperCase()).replace(/-/g, '');
 };
+
+//Add zeroes at the start ( 1 -> 001, 23 -> 023, 100 -> 100)
+const padToThree = (num) => num < 999 ? `00${num}.slice(-3)` : num;
