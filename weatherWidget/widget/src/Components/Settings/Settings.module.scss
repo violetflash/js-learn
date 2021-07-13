@@ -1,0 +1,54 @@
+.Settings {
+  position: relative;
+  width: 100%;
+  background-color: inherit;
+
+  &__title {
+    margin: 0 0 20px;
+    text-align: left;
+  }
+
+  &__city {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: center;
+    padding: 5px 5px 5px 10px;
+    width: 100%;
+    background-color: #d2d2d2;
+    border: 1px solid black;
+
+  }
+
+  &__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: inherit;
+    cursor: grab;
+
+    span {
+      width: 20px;
+      height: 2px;
+      background-color: #000;
+      margin-bottom: 4px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+
+  &__cityName {
+    padding: 0 15px;
+    max-width: calc(100% - 18px);
+    flex-grow: 1;
+    text-align: left;
+    background-color: inherit;
+  }
+}
+
+.active {
+  background-color: #8d8d8d;
+  border-style: dashed;
+}

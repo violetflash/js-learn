@@ -1,0 +1,35 @@
+.Settings {
+  position: relative;
+  width: 100%;
+  background-color: inherit;
+
+  &__title {
+    margin: 0 0 20px;
+    text-align: left;
+  }
+
+  &__burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: inherit;
+    cursor: grab;
+
+    span {
+      width: 20px;
+      height: 2px;
+      background-color: #000;
+      margin-bottom: 4px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.active {
+  background-color: #8d8d8d;
+  border-style: dashed;
+}
