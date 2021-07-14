@@ -1,0 +1,31 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.Widget {
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+  text-align: center;
+  max-width: 300px;
+  width: 100%;
+  background-color: #eee;
+  //height: 600px;
+}
+
+.Widget-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
