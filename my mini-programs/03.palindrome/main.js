@@ -10,12 +10,9 @@ function palindrome(word) {
 palindrome("wow");
 
 //На основе определения метода в прототипе String
-String.prototype.palindrome = function () {
-    if (this.valueOf() === this.split("").reverse().join("")) {
-        console.log("Слово " + this.valueOf() + " - палиндром");
-    } else {
-        console.log("Слово " + this.valueOf() + " - НЕ палиндром");
-    }
+String.prototype.isPalindrome = function () {
+    return this.valueOf() === this.split("").reverse().join("");
 }
 
-"kok".palindrome();
+console.log("kok".isPalindrome());
+console.log("koka".isPalindrome());
