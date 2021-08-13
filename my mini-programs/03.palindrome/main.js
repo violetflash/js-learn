@@ -16,3 +16,12 @@ String.prototype.isPalindrome = function () {
 
 console.log("kok".isPalindrome());
 console.log("koka".isPalindrome());
+
+//через reduceRight
+String.prototype.isPalindrome2 = function() {
+    return this.valueOf() === this.split('').reduceRight((prev, curr) => prev + curr);
+}
+
+console.log('===');
+console.log("mam".isPalindrome2());
+console.log("kok".isPalindrome2());
